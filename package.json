@@ -2,10 +2,10 @@
   "name": "redux-form-ext",
   "version": "0.0.1",
   "description": "Redux Form Extension",
-  "main": "webpack.config.js",
+  "main": "dist/redux-form-ext.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack -p --config webpack.production.config.js --progress --colors",
-    "dev": "./node_modules/.bin/webpack-dev-server --inline --hot",
+    "dev": "./node_modules/.bin/webpack-dev-server --config webpack.config.js --inline --hot",
     "sass": "./node_modules/.bin/node-sass --output-style compressed -o src src/styles/scss",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "./node_modules/.bin/webpack --watch"
