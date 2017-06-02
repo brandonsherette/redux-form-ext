@@ -1,0 +1,1 @@
+export { default as ReduxFormExt } from './redux-form-ext';
