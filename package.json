@@ -1,7 +1,7 @@
 {
-  "name": "react-plugin-boilerplate",
-  "version": "0.0.2",
-  "description": "React Plugin Boilerplate",
+  "name": "redux-form-ext",
+  "version": "0.0.1",
+  "description": "Redux Form Extension",
   "main": "webpack.config.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack -p --config webpack.production.config.js --progress --colors",
