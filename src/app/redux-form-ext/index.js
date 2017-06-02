@@ -1,1 +1,2 @@
-export { default as ReduxFormExt } from './redux-form-ext';
+export { default as ReduxFormExtComponent } from './component/index';
+export { default as ReduxFormExtValidate } from './validate';

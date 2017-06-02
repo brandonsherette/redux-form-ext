@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { ReduxFormExt } from './redux-form-ext/index';
-
-console.debug('Redux Form Ext', ReduxFormExt);
+import { FormComponents, Validate } from './redux-form-ext/index';
 
 class AppComponent extends Component {
   render() {
@@ -11,12 +9,14 @@ class AppComponent extends Component {
 
     return (
       <div className="app-component">
+        <div className="container-fluid">
         <h1>Redux Form Ext</h1>
         <p>Extention for redux form. Pre-built form components.</p>
-        <form onSubmit={handleSubmit(() => { console.debug('Form Submitted Values', values);})}>
-          
+        <form className="form-sm" onSubmit={handleSubmit((values) => { console.debug('Form Submitted Values', values);})}>
+          <FormComponents.Text label="Username" placeholder="Username" name="username" isLabelInline={false} />
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
+        </div>
       </div>
     );
   }
