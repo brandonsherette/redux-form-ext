@@ -1,0 +1,303 @@
+@import './colors';
+
+form.form-sm {
+  width: 50%;
+}
+
+form {
+  $input-height: 43px; /* same height as twbs form-control */
+  /* Group Text */
+  .form-group-text {
+    input[type="text"],
+    input[type="password"] {
+      border: 1px solid $color-border;
+      height: $input-height;
+    }
+  }/* End Group Text */
+
+  .input-wrapper {
+    position: relative;
+  }
+
+  .form-control-select {
+    .Select-control {
+      height: $input-height;
+      font-size: 1.25em;
+      padding: 6px 12px;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      border: 1px solid $color-border;
+
+      .Select-value {
+        padding: 6px 12px;
+        line-height: $input-height;
+      }
+      .Select-clear-zone {
+        line-height: $input-height;
+      }
+    }
+  }
+
+  .form-control.valid,
+  .form-control-select.valid .Select-control {
+    border: 2px solid $color-success !important;
+  }
+  .form-control.invalid,
+  .form-control-select.invalid .Select-control {
+    border: 2px solid $color-error !important;
+  }
+  .input-state-icon {
+    position: absolute;
+    font-family: FontAwesome;
+    right: 10px;
+    line-height: $input-height;
+    font-size: 1.25em;
+
+    &.valid:before {
+      content: "\f058";
+      color: $color-success;
+    }
+    &.invalid:before {
+      content: "\f057";
+      color: $color-danger;
+    }
+  }
+
+  .form-group {
+    label.label-box {
+      border: 1px solid $color-border;
+      border-right: 0;
+      border-radius: 0;
+      border-top-left-radius: 7px;
+      border-bottom-left-radius: 7px;
+      height: $input-height;
+      text-align: left;
+    }
+    input:not[type="hidden"] {
+      height: $input-height;
+      border: 1px solid $color-border;
+      border-radius: 0;
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+      text-align: left;
+    }
+  }
+
+  /* Select List */
+  .select-list {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+
+    select {
+      $textbox-height: $input-height;
+
+      height: $textbox-height;
+      width: 100%;
+    }
+  }/* End Select List */
+
+  /* Radio Group */
+  .radio-group:not(.radio-group-gender) {
+    .radio-group-item {
+      display: inline-block;
+      margin-right: 35px;
+      margin-top: 15px;
+
+      label {
+        cursor: pointer;
+      }
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      label > span {
+        background-color: $color-white;
+        border: 2px solid $color-border;
+        border-left: 4px solid $color-border;
+        border-right: 4px solid $color-border; 
+        border-radius: 7px;
+        padding: 15px 21px;
+        line-height: 1.4em;
+        color: $color-dark-grey;
+      }
+      label:hover > span {
+        background-color: $color-input-hover-bg;
+        color: $color-input-hover-font;
+      }
+      
+      label:hover input[type="radio"]:checked + span,
+      input[type="radio"]:checked + span {
+        background-color: $color-input-active-bg;
+        color: $color-input-active-font;
+      }
+    }
+  }
+  .radio-group.radio-group-vertical {
+    .radio-group-item {
+      display: block;
+      margin: 0;
+      margin-right: 0;
+      margin-top: 0;
+
+      label > span {
+        padding: 0;
+      }   
+    }
+  }/* End Radio Group */
+
+  /* Slider Group */
+  .slider-group {
+    .slider-input {
+      $height: 85px;
+      $handle-size: 26px;
+
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: $height;
+
+      .rc-slider-track {
+        background-color: $color-active-alt;
+      }
+      .rc-slider-dot:first-child {
+        margin-left: -6px;
+      }
+      .rc-slider-dot {
+        width: $handle-size * 0.5 + 1;
+        height: $handle-size * 0.5 + 1;
+        margin-left: -6px;
+        bottom: -4px;
+      }
+      .rc-slider-handle {
+        background-color: $color-active-alt;
+        border-color: $color-active-alt;
+        width: $handle-size;
+        height: $handle-size;
+        margin-left: (-1 * $handle-size / 2);
+        margin-top: (-1 * $handle-size / 2 + 2);
+      }
+      .rc-slider-dot.rc-slider-dot-active {
+        background-color: $color-active-alt;
+        border-color: $color-active-alt;
+      }
+      .rc-slider-mark {
+        top: $height / 3;
+      }
+      .rc-slider-mark-text {
+        font-size: 1.5em;
+        font-weight: 600;
+      }
+
+      .label-box {
+        width: 10%;
+        line-height: $height;
+        height: $height;
+        padding: 0;
+        text-align: center;
+      }
+
+      .slider-wrapper {
+        padding-left: 25px;
+        padding-right: 25px;
+        width: 84%;
+        border-top: 1px solid $color-border;
+        border-bottom: 1px solid $color-border;
+        height: $height;
+        padding-top: 25px;
+      }
+
+      .label-box:last-child {
+        background-color: $color-white;
+        color: $color-dark-grey;
+        width: 6%;
+        font-size: 2em;
+      }
+    }
+  }/* End Slider Group */
+
+ /* Checkbox Group */
+  .checkbox-group {
+    margin-top: 15px;
+
+    .checkbox-group-item {
+      display: inline-block;
+      width: 150px;
+      margin-bottom: 15px;
+
+      .selection-number {
+        position: absolute;
+        top: 0;
+        right: 15px;
+      }
+
+      label {
+        cursor: pointer;
+        position: relative;
+      }
+
+      label span {
+        margin-left: 10px;
+        position: relative;
+
+        span.subtitle {
+          position: absolute;
+          right: 15px;
+          font-size: 0.5em;
+          top: 10px;
+        }
+      }
+    }
+  }/* End Checkbox Group */
+
+
+  /* Combo Box */
+  .combo-box {
+    position: relative;
+    text-align: left;
+    $textbox-height: $input-height;
+
+    .combo-text input[type="text"] {
+      width: 90%;
+      height: $textbox-height;
+      display: inline-block;
+    }
+    .toggle {
+      width: 10%;
+      height: $textbox-height;
+      padding: 0;
+      border-radius: 0;
+      vertical-align: top;
+      font-size: 24px;
+    }
+
+    .hint-box {
+      width: 100%;
+      text-align: left;
+      max-height: 150px;
+      position: absolute;
+      background-color: $color-dark-grey;
+      overflow: scroll;
+      color: $color-white;
+      z-index: 10;
+    }
+
+    ul.list {
+      width: 100%;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .list-item {
+      padding: 5px;
+      border: 1px solid $color-light-grey;
+      cursor: pointer;
+    }
+
+    .list-item:hover {
+      background-color: $color-dark-blue;
+      color: $color-white;
+    }
+  }/* End Combo Box*/
+}

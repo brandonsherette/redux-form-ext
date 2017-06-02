@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { FormComponents, Validate } from './redux-form-ext/index';
+import { FormComponents } from './redux-form-ext/index';
+import validate from './validate';
 
 class AppComponent extends Component {
   render() {
@@ -9,11 +10,15 @@ class AppComponent extends Component {
 
     return (
       <div className="app-component">
-        <div className="container-fluid">
+        <div className="container">
         <h1>Redux Form Ext</h1>
         <p>Extention for redux form. Pre-built form components.</p>
         <form className="form-sm" onSubmit={handleSubmit((values) => { console.debug('Form Submitted Values', values);})}>
-          <FormComponents.Text label="Username" placeholder="Username" name="username" isLabelInline={false} />
+          <FormComponents.Text label="* Username" placeholder="Username" name="username" isLabelInline={false} />
+          <FormComponents.Text label="* Email" placeholder="Email" name="email" isLabelInline={false} />
+          <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
+          <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
+          <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         </div>
@@ -23,12 +28,16 @@ class AppComponent extends Component {
 }
 
 const AppComponentForm = reduxForm({
-  form: 'demo'
+  form: 'demo',
+  validate: validate
 })(AppComponent);
 
 const mapStateToProps = (state) => {
   return {
     initialValues: {
+      email: '',
+      password: '',
+      phone: '',
       username: ''
     }
   };
