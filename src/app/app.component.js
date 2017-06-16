@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { FormComponents } from './redux-form-ext/index';
-import validate from './validate';
+import RegisterNormalForm from './examples/register-normal-form/register-normal-form.container';
+import RegisterStepForm from './examples/register-step-form/register-step-form.container';
 
 class AppComponent extends Component {
   render() {
@@ -10,43 +10,20 @@ class AppComponent extends Component {
 
     return (
       <div className="app-component">
+        <div className="app-header">
+          <h1>Redux Form Ext</h1>
+          <h5>Extention for redux form.Pre-built form components.</h5>
+        </div>
         <div className="container">
-        <h1>Redux Form Ext</h1>
-        <p>Extention for redux form. Pre-built form components.</p>
-        <form className="form-sm" onSubmit={handleSubmit((values) => { console.debug('Form Submitted Values', values);})}>
-          <FormComponents.Text label="* Username" placeholder="Username" name="username" isLabelInline={false} />
-          <FormComponents.Text label="* Email" placeholder="Email" name="email" isLabelInline={false} />
-          <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
-          <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
-          <p className="disclaimer">* Is Required</p>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+          <div className="w-50">
+            <RegisterStepForm />
+            <div className="break-4x"></div>
+            <RegisterNormalForm />
+          </div>
         </div>
       </div>
     );
   }
 }
 
-const AppComponentForm = reduxForm({
-  form: 'demo',
-  validate: validate
-})(AppComponent);
-
-const mapStateToProps = (state) => {
-  return {
-    initialValues: {
-      email: '',
-      password: '',
-      phone: '',
-      username: ''
-    }
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppComponentForm);
+export default AppComponent;

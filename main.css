@@ -1,3 +1,21 @@
-#app-root {
-  margin-top: 15px;
+.app-component {
+  padding-bottom: 25px;
+}
+.break-4x {
+  margin-top: 40px;
+}
+.app-header {
+  background-color: #373737;
+  color: #ffffff;
+  padding: 25px;
+  margin-bottom: 15px;
+}
+.app-header h1, app-header h5 {
+  margin: 0;
+}
+section {
+  margin-bottom: 25px;
+}
+.w-50 {
+  width: 50%;
 }

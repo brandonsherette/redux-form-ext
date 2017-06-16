@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
-import normalizePhone from './normalize-phone';
+import Normalize from '../normalize';
 
 const renderNotification = (touched, error, warning) => {
   if (!touched) {
@@ -74,7 +74,7 @@ class renderField extends Component {
 
 const Phone = ({reduxFormChange, label, labelDisclaimer, name, isLabelInline, placeholder, type, validate}) => (
   <div>
-    <Field normalize={normalizePhone} name={name} type={type} labelDisclaimer={labelDisclaimer} placeholder={placeholder} component={renderField} label={label} isLabelInline={isLabelInline} validate={validate} />
+    <Field normalize={Normalize.phone} name={name} type={type} labelDisclaimer={labelDisclaimer} placeholder={placeholder} component={renderField} label={label} isLabelInline={isLabelInline} validate={validate} />
   </div>
 );
 

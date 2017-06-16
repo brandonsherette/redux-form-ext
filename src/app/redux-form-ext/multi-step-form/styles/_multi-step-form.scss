@@ -1,0 +1,7 @@
+.multi-step-form {
+  .form-footer:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
