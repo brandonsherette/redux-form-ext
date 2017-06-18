@@ -3,6 +3,10 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.1.0-rc1**
+- Added Multi Step Form Functionality and Examples.
+- Created example folder to see how to interact with the extension.
+
 **v0.0.1-alpha1**
 - Base code implemented.
 

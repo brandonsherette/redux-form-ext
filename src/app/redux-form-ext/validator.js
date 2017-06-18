@@ -24,8 +24,20 @@ const Validator = {
     return (pass && isValidFormat);
   },
 
+  isValidMiddleInitial: (str) => {
+    return (/^[a-zA-Z]{1}$/.test(str));
+  },
+
+  isValidNameString: (str) => {
+    return (/^[a-zA-Z]{1}[a-zA-Z ]+$/.test(str));
+  },
+
+  isValidTitleString: (str) => {
+    return (/^[a-zA-Z0-9{1}[a-zA-Z0-9 \!\?\.\,\(\)\-]+$/.test(str));
+  },
+
   isValidZip: (zip) => {
-    return (/[0-9]{4,10}/.test(zip));
+    return (/^[0-9]{4,10}$/.test(zip));
   }
 }
 

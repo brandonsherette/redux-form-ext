@@ -1,0 +1,71 @@
+ol.multi-step-breadcrumb {
+  $item-width: 150px;
+  $line-height: 24px;
+  list-style: none;
+
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+
+  li[role="button"]:hover {
+    color: $color-info-light;
+    background-color: transparent;
+
+    &:after {
+      background-color: $color-info-light;
+      color: $color-white;
+    }
+  }
+
+  li {
+    width: $item-width;
+    position: relative;
+    line-height: $line-height;
+  }
+
+  li:before {
+    width: 100%;
+    height: 5px;
+    background-color: $color-sand;
+    content: "";
+    position: absolute;
+    top: ($line-height + ($line-height / 2));
+    left: -50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  li:first-child:before {
+    display: none;
+  }
+
+  li.active:before,
+  li.active:after {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+
+  li:after {
+    background-color: $color-sand;
+    border-radius: 50%;
+    display: block;
+    width: 24px;
+    height: 24px;
+    content: "0";
+    line-height: 24px;
+    color: $color-dark-grey;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  @for $i from 1 through 6 {
+    li:nth-child(#{$i}):after {
+      content: quote(#{$i}) !important;
+    }
+  }
+}
