@@ -337,3 +337,12 @@ const Step2 = () => (
 
 export default Step2;
 ```
+
+## CSS
+To include styling for the form elements in es6, you can require the stylesheet as shown below:
+
+```javascript
+require('redux-form-ext/dist/redux-form-ext.css');
+```
+
+Or you can copy over the files from **node_modules/redux-form-ext/dist/redux-form-ext.css** and include them into your webpage.
