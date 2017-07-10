@@ -77,6 +77,8 @@ import { FormComponents, Normalize } from 'redux-form-ext';
 import validate from './validate';
 import { save, resetSaveState } from './actions';
 
+require('redux-form-ext/dist/redux-form-ext.css');
+
 class RegisterNormalForm extends Component {
   render() {
     const {handleSubmit, handleSave, handleResetSaveState, isSaving, isSaveCompleted, saveError} = this.props;
@@ -198,6 +200,8 @@ import validate from './validate';
 import { save, resetSaveState } from './actions';
 import Step1 from './step1';
 import Step2 from './step2';
+
+require('redux-form-ext/dist/redux-form-ext.css');
 
 class RegisterStepForm extends Component {
   render() {
