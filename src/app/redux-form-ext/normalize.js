@@ -5,7 +5,7 @@ const Normalize = {
    * Difference between name and title is name only uppercases first letter of each word leaving original format of the rest of the letters.
    * 
    * Example: 
-   * var name = NormalizeUtil.name('mC doNalds'); // result 'MC DoNalds''
+   * var name = Normalize.name('mC doNalds'); // result 'MC DoNalds''
    * 
    * @method name
    * @param {String} str the string to normalize.
@@ -32,7 +32,7 @@ const Normalize = {
    * Normalizes middle initial type.
    * 
    * Example: 
-   * var middleInitial = NormalizeUtil.middleInitital('iGaloo'') // result 'I'
+   * var middleInitial = Normalize.middleInitital('iGaloo'') // result 'I'
    * 
    * @method middleInitial
    * @param {String} str the string to normalize.
@@ -41,20 +41,20 @@ const Normalize = {
   middleInitial: function(str) {
     if (!str) { return str; }
 
-    return NormalizeUtil.name(str.substr(0,1));
+    return Normalize.name(str.substr(0,1));
   },
 
   /**
    * Normalizes a U.S. Phone number.
    * 
-   * Example: 1112223333 will result in (111) 222 - 3333
+   * Example: 
+   * var phone = Normalize.phone(1112223333); // result: "(111) 222 - 3333"
    * 
    * @method phone
    * @param {String} value the value to normalize.
-   * @param {String} previousValue the previous value that the phone was previously.
    * @return {String} the normalized phone value.
    */
-  phone: function(value, previousValue) {
+  phone: function(value) {
     const regexRemoveNonDigits = /[^\d]/g;
     const regexRightParenthesisMissing = /^\([0-9]{0,3}[^\)]+$/;
     let cleanedValue = value.trim();
@@ -99,7 +99,7 @@ const Normalize = {
    * Difference between title and name is title, lowercase everything but first letter in word.
    * 
    * Example:
-   * var title = NormalizeUtil.title('mC dOnalds'); // result 'Mc Donalds';
+   * var title = Normalize.title('mC dOnalds'); // result 'Mc Donalds';
    * 
    * @method title 
    * @param {String} str the string to normalize.
@@ -108,7 +108,7 @@ const Normalize = {
   title: function(str) {
     if (!str) { return str; }
 
-    return NormalizeUtil.name(str.toLowerCase());
+    return Normalize.name(str.toLowerCase());
   }
 };
 

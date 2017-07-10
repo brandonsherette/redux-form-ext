@@ -17,8 +17,6 @@ class RegisterStepForm extends Component {
       <MultiStepForm.Step title="Account"><Step2 /></MultiStepForm.Step>
     ];
 
-    console.debug('Steps', steps);
-
     if (isSaving) {
       return (
         <section>
