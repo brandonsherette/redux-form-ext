@@ -3,6 +3,10 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.1.1-rc1**
+- Added TextArea Component.
+- Updated Readme with more details on the different form components and their props.
+
 **v0.1.0-rc3**
 - Fixed issues with normalize middle initial and title.
 
