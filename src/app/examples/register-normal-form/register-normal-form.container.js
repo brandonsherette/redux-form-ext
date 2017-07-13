@@ -46,6 +46,7 @@ class RegisterNormalForm extends Component {
           <FormComponents.Text normalize={Normalize.name} label="* Lastname" placeholder="Lastname" name="lastname" isLabelInline={false} />
           <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
           <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
+          <FormComponents.TextArea label="Account Notes" placeholder="Account Notes" name="accountNotes" isLabelInline={false} />
           <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>

@@ -5,7 +5,8 @@ const defaultModel = {
   password: '',
   firstname: '',
   lastname: '',
-  phone: ''
+  phone: '',
+  accountNotes: '',
 };
 const initialState = {
   defaultModel,

@@ -5,6 +5,7 @@ import SelectList from './select-list';
 import SelectListAdv from './select-list-adv';
 import SliderGroup from './slider-group';
 import Text from './text';
+import TextArea from './text-area';
 import USStateList from './us-state-list';
 
 require('./styles/index.scss');
@@ -17,6 +18,7 @@ const Components = {
   SelectListAdv,
   SliderGroup,
   Text,
+  TextArea,
   USStateList,
 };
 
