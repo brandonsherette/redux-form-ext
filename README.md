@@ -64,6 +64,155 @@ import { FormComponents, Normalize, Validator } from 'redux-form-ext';
 - isValidZip(str : String) : Boolean
   - Value must be inbetween 4 - 10 numbers long (only numbers allowed).
 
+## FormComponents
+Form Components are react components that work along with redux form, and streamline several features such as 
+success and error styling on form elements, and various other built in features.
+
+### Import FormComponents
+```javascript
+import { FormComponents } from 'redux-form-ext';
+```
+
+### Available Components
+- CheckboxGroup
+  - Props
+    - className (optional)
+    - limit (optional)
+    - name (required)
+    - updateField (required)
+      - Helps notify redux-form about the full collection of changes made as a group.
+    - options (required)
+      - ArrayOfObjects
+        - name (required)
+        - subtitle (optional)
+        - value (required)
+        - className (optional)
+  - Example
+    ```javascript
+    import React, { Component } from 'react';
+    import { change, reduxForm } from 'redux-form';
+    import { FormComponents } from 'redux-form-ext';
+
+    class MyForm extends Component {
+      render() {
+        var options = [
+          {
+            name: 'Option 1',
+            subtitle: 'Subtitle (Optional)',
+            value: 'option1',
+            className: 'custom-css-classes'
+          }
+        ];
+
+        return (
+          <form onSubmit={handleSubmit}>
+            <FormComponents.CheckboxGroup className="my-custom-class" limit="4" name="myCheckboxName" updateField={(inputName, nextGroupValues) => {reduxChange(inputName, nextGroupValues)}} options={options} />
+
+            <button type="submit">Submit</button>
+          </form>
+        );
+      }
+    }
+
+    const mapStateToProps = (state) => {
+      return {
+        initialValues: state.myReducer.myCurrentValues
+      };
+    };
+
+    const mapDispatchToProps = (dispatch) => {
+      return {
+        reduxChange: (inputName, values) => { dispatch(change('myFormName', inputName, values))}
+      };
+    };
+
+    const Container = connect(mapStateToProps, mapDispatchToProps)(MyForm);
+
+    export default reduxForm({
+      'form': 'myFormName'
+    });
+    ```
+- Phone
+  - Phone text field with auto US phone normalization.
+  - Props
+    - label (required)
+    - labelDisclaimer (optional)
+    - name (required)
+    - placeholder (optional)
+    - isLabelInline (optional defaults to true)
+- RadioGroup
+  - Props
+    - className (optional)
+    - groupName (required)
+    - options (required)
+      - ArrayOfObjects
+        - value (required)
+        - name (required)
+    - isRequired (optional)
+    - resetFieldsOnChange (optional)
+      - ArrayOfObjects
+        - name (required)
+        - value (required)
+- SelectList
+  - Props
+    - label (optional)
+    - name (required)
+    - options (required)
+      - ArrayOfObjects
+        - value (required)
+        - name (required)
+- SelectListAdv
+  - Props
+    - label (optional)
+    - labelDisclaimer (optional)
+    - isLabelInline (optional defaults to true)
+    - name (required)
+    - reduxFormChange (required)
+      - A way to dispatch redux-form change action.
+    - options (required)
+      - ArrayOfObjects
+        - value (required)
+        - name (required)
+- SliderGroup
+  - Props
+    - capValue (required)
+      - The max value the slider can allow (this is different than what it's shown, for example if 12 is shown as the max, and capValue is 6, the slider will never go pass the 6 value)
+    - groupName (required)
+      - name of the form element.
+    - max (required)
+      - max value shown to the user.
+    - options (required)
+      - ArrayOfObjects
+        - label (required)
+        - fieldName (required)
+    - triggerFieldChange (required)
+      - Event to trigger when there is a value changed.
+- TextArea
+  - Props
+    - label (required)
+    - labelDisclaimer (optional)
+    - maxLength (optional)
+    - name (required)
+    - normalize (optional)
+      - Function to normalize the value (use ReduxFormExt Normalize class).
+    - placeholder (optional)
+    - isLabelInline (optional defaults to true)
+- Text
+  - Props
+    - label (required)
+    - labelDisclaimer (optional)
+    - maxLength (optional)
+    - name (required)
+    - normalize (optional)
+      - Function to normalize the value (use ReduxFormExt Normalize class).
+    - placeholder (optional)
+    - isLabelInline (optional defaults to true)
+    - type (optional defaults to 'text', other option is 'password')
+- USStateList
+  - Props
+    - reduxFormChange (required)
+      - Method to dispatch a change event to redux-form.
+
 ## Examples
 See "src/app/app.component.js" for various form examples.
 

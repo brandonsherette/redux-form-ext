@@ -19,6 +19,13 @@ form {
     position: relative;
   }
 
+  .form-group-textarea {
+    textarea {
+      padding-right: 40px;
+      min-height: 172px;
+    }
+  }
+
   .form-control-select {
     .Select-control {
       height: $input-height;
