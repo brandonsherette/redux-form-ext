@@ -96,15 +96,15 @@ class RegisterNormalForm extends Component {
             )}
             options={[
               {
-                title: 'Yes',
+                name: 'Yes',
                 value: 'yes'
               },
               {
-                title: 'Maybe',
+                name: 'Maybe',
                 value: 'maybe'
               },
               {
-                title: 'No',
+                name: 'No',
                 value: 'no'
               }
             ]}

@@ -13,7 +13,7 @@ function handleOnChange({input, meta, fieldsToResetOnChange, value}) {
 
 const RadioGroup = ({className, input, meta, options, fieldsToResetOnChange}) => (
   <div className={'radio-group ' + className}>
-    {options.map(o => (<div className="radio-group-item" key={o.value}><label><input type="radio" {...input} onChange={(value) => {handleOnChange({input, value, meta, fieldsToResetOnChange})}} value={o.value} checked={o.value === input.value} /><span className={o.className}>{o.title}</span></label></div>))}
+    {options.map(o => (<div className="radio-group-item" key={o.value}><label><input type="radio" {...input} onChange={(value) => {handleOnChange({input, value, meta, fieldsToResetOnChange})}} value={o.value} checked={o.value === input.value} /><span className={o.className}>{o.name}</span></label></div>))}
     {meta.touched && meta.error && <span className="error">{meta.error}</span>}
   </div>
 );
@@ -29,7 +29,10 @@ const RadioGroupField = ({className, groupName, isRequired, options, fieldsToRes
 RadioGroupField.propTypes = {
   className: PropTypes.string,
   groupName: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired
+  })).isRequired,
   isRequired: PropTypes.bool,
   fieldsToResetOnChange: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,

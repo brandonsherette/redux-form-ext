@@ -4,6 +4,7 @@
 Extension for redux form.
 ## Versions
 **v0.2.0-rc1**
+- Updated Radio Group options to use the name "name" instead of "title" for the options array.
 - Changed resetFieldsOnChange to fieldsToResetOnChange in radio group.
 - Added Toggle Group Component.
 
@@ -104,6 +105,7 @@ import { FormComponents } from 'redux-form-ext';
     - options (required)
       - ArrayOfObjects
         - name (required)
+          - The Display Name.
         - subtitle (optional)
         - value (required)
         - className (optional)
@@ -166,12 +168,14 @@ import { FormComponents } from 'redux-form-ext';
     - groupName (required)
     - options (required)
       - ArrayOfObjects
-        - value (required)
         - name (required)
+          - The Display Name.
+        - value (required)
     - isRequired (optional)
     - fieldsToResetOnChange (optional)
       - ArrayOfObjects
         - name (required)
+          - The Display Name.
         - value (required)
 - SelectList
   - Props
@@ -181,8 +185,9 @@ import { FormComponents } from 'redux-form-ext';
     - name (required)
     - options (required)
       - ArrayOfObjects
-        - value (required)
         - name (required)
+          - The Display Name.
+        - value (required)
   - Example
     ```javascript
     <FormComponents.SelectList 
@@ -221,8 +226,9 @@ import { FormComponents } from 'redux-form-ext';
       - A way to dispatch redux-form change action.
     - options (required)
       - ArrayOfObjects
-        - value (required)
         - name (required)
+          - The Display Name.
+        - value (required)
 - SliderGroup
   - Props
     - capValue (required)
@@ -258,6 +264,52 @@ import { FormComponents } from 'redux-form-ext';
     - placeholder (optional)
     - isLabelInline (optional defaults to true)
     - type (optional defaults to 'text', other option is 'password')
+- ToggleGroup
+  - Props
+    - className (optional)
+    - groupName (required)
+    - label (optional)
+    - labelHint (optional)
+    - options (required)
+      - ArrayOfObjects
+        - name (required)
+          - The Display Name.
+        - value
+    - fieldsToResetOnChange
+  - Example
+    ```javascript
+    <FormComponents.ToggleGroup
+      fieldsToResetOnChange={[
+        {
+          name: 'accountType',
+          value: ''
+        }
+      ]}
+      groupName="subscribe" 
+      label="Subscribe"
+      labelHint={(
+        <i 
+          role="button" 
+          className="fa fa-question-circle" 
+          onClick={() => { alert('Subscribing will allow you to get notified when new changes occur.')} }>
+        </i>
+      )}
+      options={[
+        {
+          name: 'Yes',
+          value: 'yes'
+        },
+        {
+          name: 'Maybe',
+          value: 'maybe'
+        },
+        {
+          name: 'No',
+          value: 'no'
+        }
+      ]}
+    />
+    ```
 - USStateList
   - Props
     - reduxFormChange (required)

@@ -51,7 +51,10 @@ ToggleGroup.propTypes = {
   groupName: PropTypes.string.isRequired,
   label: PropTypes.string,
   labelHint: PropTypes.node,
-  options: PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired
+  })).isRequired,
   fieldsToResetOnChange: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired
