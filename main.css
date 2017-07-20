@@ -1,6 +1,12 @@
 .app-component {
   padding-bottom: 25px;
 }
+.break {
+  margin-top: 10px;
+}
+.break-2x {
+  margin-top: 20px;
+}
 .break-4x {
   margin-top: 40px;
 }

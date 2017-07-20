@@ -6,6 +6,21 @@ form.form-sm {
 
 form {
   $input-height: 43px; /* same height as twbs form-control */
+
+  /* generic styling */
+  .px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .error {
+    color: $color-error;
+  }
+
   /* Group Text */
   .form-group-text {
     input[type="text"],
@@ -48,10 +63,27 @@ form {
   .form-control-select.valid .Select-control {
     border: 2px solid $color-success !important;
   }
+  .label-box.valid {
+    border: 2px solid $color-success !important;
+    border-right: 0px !important;
+  }
+  .input-wrapper.valid select {
+    border: 2px solid $color-success !important;
+  }
+
   .form-control.invalid,
   .form-control-select.invalid .Select-control {
     border: 2px solid $color-error !important;
   }
+
+  .label-box.invalid {
+    border: 2px solid $color-error !important;
+    border-right: 0px !important;
+  }
+  .input-wrapper.invalid select {
+    border: 2px solid $color-error !important;
+  }
+
   .input-state-icon {
     position: absolute;
     font-family: FontAwesome;
@@ -77,8 +109,14 @@ form {
       border-top-left-radius: 7px;
       border-bottom-left-radius: 7px;
       height: $input-height;
+      line-height: $input-height;
       text-align: left;
+      background-color: $color-light-grey;
+      color: $color-dark-grey;
     }
+    label .label-hint {margin-left: 6px;}
+    label .label-hint > *[role=button]{color: $color-primary;}
+    label .label-hint > *[role=button]:hover {color: $color-active-alt;}
     input:not[type="hidden"] {
       height: $input-height;
       border: 1px solid $color-border;
@@ -97,7 +135,9 @@ form {
 
     select {
       $textbox-height: $input-height;
-
+      border: 1px solid $color-border;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
       height: $textbox-height;
       width: 100%;
     }

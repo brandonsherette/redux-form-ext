@@ -19,8 +19,12 @@ const validate = (values) => {
     errors.password = 'Invalid Password';
   }
 
+  if (!values.accountType) {
+    errors.accountType = 'Required';
+  }
+
   if (!values.accountNotes) {
-    errors.accountNotes = 'Notes Required';
+    errors.accountNotes = 'Required';
   }
 
   return errors;

@@ -3,6 +3,11 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.1.2-rc1**
+- Updated styling for select list.
+- Select list now properly shows error state.
+- Added labelHint prop to Select List Component.
+
 **v0.1.1-rc1**
 - Added TextArea Component.
 - Updated Readme with more details on the different form components and their props.
@@ -167,11 +172,41 @@ import { FormComponents } from 'redux-form-ext';
 - SelectList
   - Props
     - label (optional)
+    - labelHint (optional)
+      - Used to add font awesome icons and click actions to open up tooltips or modals with additional information.
     - name (required)
     - options (required)
       - ArrayOfObjects
         - value (required)
         - name (required)
+  - Example
+    ```javascript
+    <FormComponents.SelectList 
+      name="accountType" 
+      options={[
+        {
+          name: 'Select Account Type',
+          value: ''
+        },
+        {
+          name: 'General',
+          value: 'general'
+        },
+        {
+          name: 'Admin',
+          value: 'admin'
+        },
+        {
+          name: 'Power User',
+          value: 'power'
+        }
+      ]}
+      label="Account Type" 
+      labelHint={(
+        <i role="button" className="fa fa-question-circle" onClick={() => { alert('Account type determines the permissions the account has.')} }></i>
+      )}
+    />
+    ```
 - SelectListAdv
   - Props
     - label (optional)

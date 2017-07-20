@@ -10,6 +10,24 @@ import { save, resetSaveState } from './actions';
 class RegisterNormalForm extends Component {
   render() {
     const {handleSubmit, handleSave, handleResetSaveState, isSaving, isSaveCompleted, saveError} = this.props;
+    const actTypeOptions = [
+      {
+        name: 'Select Account Type',
+        value: ''
+      },
+      {
+        name: 'General',
+        value: 'general'
+      },
+      {
+        name: 'Admin',
+        value: 'admin'
+      },
+      {
+        name: 'Power User',
+        value: 'power'
+      }
+    ];
 
     if (isSaving) {
       return (
@@ -46,6 +64,8 @@ class RegisterNormalForm extends Component {
           <FormComponents.Text normalize={Normalize.name} label="* Lastname" placeholder="Lastname" name="lastname" isLabelInline={false} />
           <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
           <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
+          <div className="break-2x"></div>
+          <FormComponents.SelectList name="accountType" options={actTypeOptions} label="Account Type" labelHint={(<i role="button" className="fa fa-question-circle" onClick={() => { alert('Account type determines the permissions the account has.')} }></i>)} />
           <FormComponents.TextArea label="Account Notes" placeholder="Account Notes" name="accountNotes" isLabelInline={false} />
           <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
