@@ -65,8 +65,50 @@ class RegisterNormalForm extends Component {
           <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
           <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
           <div className="break-2x"></div>
-          <FormComponents.SelectList name="accountType" options={actTypeOptions} label="Account Type" labelHint={(<i role="button" className="fa fa-question-circle" onClick={() => { alert('Account type determines the permissions the account has.')} }></i>)} />
+          <FormComponents.SelectList 
+            name="accountType" 
+            options={actTypeOptions} 
+            label="Account Type" 
+            labelHint={(
+              <i 
+                role="button" 
+                className="fa fa-question-circle" 
+                onClick={() => { alert('Account type determines the permissions the account has.')} }>
+              </i>
+            )} 
+          />
           <FormComponents.TextArea label="Account Notes" placeholder="Account Notes" name="accountNotes" isLabelInline={false} />
+          <FormComponents.ToggleGroup
+            fieldsToResetOnChange={[
+              {
+                name: 'accountType',
+                value: ''
+              }
+            ]}
+            groupName="subscribe" 
+            label="Subscribe"
+            labelHint={(
+               <i 
+                role="button" 
+                className="fa fa-question-circle" 
+                onClick={() => { alert('Subscribing will allow you to get notified when new changes occur.')} }>
+              </i>
+            )}
+            options={[
+              {
+                title: 'Yes',
+                value: 'yes'
+              },
+              {
+                title: 'Maybe',
+                value: 'maybe'
+              },
+              {
+                title: 'No',
+                value: 'no'
+              }
+            ]}
+          />
           <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>

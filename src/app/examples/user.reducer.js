@@ -7,6 +7,7 @@ const defaultModel = {
   lastname: '',
   phone: '',
   accountNotes: '',
+  subscribe: 'no',
 };
 const initialState = {
   defaultModel,

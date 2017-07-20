@@ -3,6 +3,10 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.2.0-rc1**
+- Changed resetFieldsOnChange to fieldsToResetOnChange in radio group.
+- Added Toggle Group Component.
+
 **v0.1.2-rc1**
 - Updated styling for select list.
 - Select list now properly shows error state.
@@ -165,7 +169,7 @@ import { FormComponents } from 'redux-form-ext';
         - value (required)
         - name (required)
     - isRequired (optional)
-    - resetFieldsOnChange (optional)
+    - fieldsToResetOnChange (optional)
       - ArrayOfObjects
         - name (required)
         - value (required)

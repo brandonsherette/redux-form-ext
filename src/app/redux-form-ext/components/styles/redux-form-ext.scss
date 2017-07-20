@@ -102,7 +102,7 @@ form {
   }
 
   .form-group {
-    label.label-box {
+    .label-box {
       border: 1px solid $color-border;
       border-right: 0;
       border-radius: 0;
@@ -111,12 +111,12 @@ form {
       height: $input-height;
       line-height: $input-height;
       text-align: left;
-      background-color: $color-light-grey;
+      background-color: $color-white;
       color: $color-dark-grey;
     }
-    label .label-hint {margin-left: 6px;}
-    label .label-hint > *[role=button]{color: $color-primary;}
-    label .label-hint > *[role=button]:hover {color: $color-active-alt;}
+    .label-hint {margin-left: 6px;}
+    .label-hint > *[role=button]{color: $color-primary;}
+    .label-hint > *[role=button]:hover {color: $color-active-alt;}
     input:not[type="hidden"] {
       height: $input-height;
       border: 1px solid $color-border;
@@ -142,6 +142,46 @@ form {
       width: 100%;
     }
   }/* End Select List */
+
+  /* Toggle Group */
+  .toggle-group {
+    .input-wrapper {
+      background-color: $color-white;
+      border: 1px solid $color-border;
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+      height: $input-height;
+    }
+
+    .radio-group:not(.radio-group-gender) {
+      text-align: center;
+      margin: 0 10px;
+      .radio-group-item {
+        height: $input-height;
+        line-height: $input-height;
+        margin: 0;
+        display: inline-block;
+
+        label > span {
+          border: 1px solid $color-border;
+          border-right: 0px;
+          border-radius: 0;
+          background-color: $color-light-grey;
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+          padding: 6px 21px;
+        }
+      }
+      .radio-group-item:last-child label > span {
+        border-right: 1px solid $color-border;
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
+      }
+      .radio-group-item:first-child label > span {
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+      }
+    }
+  }
 
   /* Radio Group */
   .radio-group:not(.radio-group-gender) {
