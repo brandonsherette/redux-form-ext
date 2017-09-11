@@ -3,6 +3,10 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.2.1**
+- Updated SelectListAdv reduxFormChange to now properly send correct data to the redux change method.
+- Updated styling for SelectListAdv.
+
 **v0.2.0-rc1**
 - Updated Radio Group options to use the name "name" instead of "title" for the options array.
 - Changed resetFieldsOnChange to fieldsToResetOnChange in radio group.
@@ -226,9 +230,78 @@ import { FormComponents } from 'redux-form-ext';
       - A way to dispatch redux-form change action.
     - options (required)
       - ArrayOfObjects
-        - name (required)
+        - label (required)
           - The Display Name.
         - value (required)
+  - Example
+    ```javascript
+    import React, { Component } from 'react';
+    import { connect } from 'react-redux';
+    import { change as reduxFormChange, reduxForm } from 'redux-form';
+    import { FormComponents } from 'redux-form-ext';
+
+    class MyForm extends Component {
+      render() {
+        const { handleSubmit, handleSave } = this.props;
+        
+        return (
+          <form onSubmit={handleSubmit((values) => { handleSave(values) })}>
+            <FormComponents.SelectListAdv
+              label="Account Type"
+              name="accountType"
+              isLabelInline={true}
+              options={[
+                {
+                  label: 'General',
+                  value: 'general'
+                },
+                {
+                  label: 'Admin',
+                  value: 'admin'
+                },
+                {
+                  label: 'Power User',
+                  value: 'power'
+                }
+              ]}
+              reduxFormChange={reduxFormChange}
+            />
+          </form>
+        );
+      }
+    }
+
+    const mapStateToProps = (state) => {
+      return {
+        initialValues: {
+          accountType: ''
+        }
+      };
+    };
+
+    const mapDispatchToProps = (dispatch) => {
+      return {
+        reduxFormChange: (field, values) => {
+          dispatch(reduxFormChange('myForm', field, values));
+        }
+      };
+    };
+
+    const MyFormContainer = connect(mapStateToProps, mapDispatchToProps)(MyForm);
+
+    export default reduxForm({
+      form: 'myForm',
+      validate: (values) => {
+        const errors = {};
+
+        if (!values.accountType) {
+          errors.accountType = 'Required';
+        }
+
+        return errors;
+      }
+    })(MyFormContainer);
+    ```
 - SliderGroup
   - Props
     - capValue (required)

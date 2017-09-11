@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { change as reduxFormChange, reduxForm } from 'redux-form';
 import Loading from '../../vendor/loading/loading';
 import { FormComponents, Normalize } from '../../redux-form-ext/index';
 import validate from '../validate';
@@ -9,7 +9,7 @@ import { save, resetSaveState } from './actions';
 
 class RegisterNormalForm extends Component {
   render() {
-    const {handleSubmit, handleSave, handleResetSaveState, isSaving, isSaveCompleted, saveError} = this.props;
+    const {handleSubmit, handleSave, handleResetSaveState, isSaving, isSaveCompleted, reduxFormChange, saveError} = this.props;
     const actTypeOptions = [
       {
         name: 'Select Account Type',
@@ -77,6 +77,26 @@ class RegisterNormalForm extends Component {
               </i>
             )} 
           />
+          <FormComponents.SelectListAdv
+            label="Account Type"
+            name="accountType2"
+            isLabelInline={true}
+            options={[
+              {
+                label: 'General',
+                value: 'general'
+              },
+              {
+                label: 'Admin',
+                value: 'admin'
+              },
+              {
+                label: 'Power User',
+                value: 'power'
+              }
+            ]}
+            reduxFormChange={reduxFormChange}
+          />
           <FormComponents.TextArea label="Account Notes" placeholder="Account Notes" name="accountNotes" isLabelInline={false} />
           <FormComponents.ToggleGroup
             fieldsToResetOnChange={[
@@ -137,7 +157,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleResetSaveState: () => { dispatch(resetSaveState()) },
-    handleSave: (user) => { dispatch(save(user)) }
+    handleSave: (user) => { dispatch(save(user)) },
+    reduxFormChange: (field, values) => {
+      dispatch(reduxFormChange('register-normal-form', field, values));
+    }
   };
 };
 

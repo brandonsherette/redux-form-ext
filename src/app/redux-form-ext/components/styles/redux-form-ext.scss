@@ -6,7 +6,6 @@ form.form-sm {
 
 form {
   $input-height: 43px; /* same height as twbs form-control */
-
   /* generic styling */
   .px-0 {
     padding-left: 0px;
@@ -41,20 +40,34 @@ form {
     }
   }
 
+  .label-inline .Select-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
   .form-control-select {
+    .Select-placeholder {
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin: 0;
+      line-height: initial;
+    }
     .Select-control {
       height: $input-height;
       font-size: 1.25em;
-      padding: 6px 12px;
+      /*padding: 6px 12px;*/
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
       border: 1px solid $color-border;
 
       .Select-value {
         padding: 6px 12px;
-        line-height: $input-height;
+        /*line-height: $input-height;*/
       }
       .Select-clear-zone {
-        line-height: $input-height;
+        /*line-height: $input-height;*/
       }
     }
   }

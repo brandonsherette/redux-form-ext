@@ -11,8 +11,6 @@ class MultiStepForm extends Component {
   constructor(props) {
     super(props);
 
-    console.debug('in constructor');
-
     this.state = {
       curStepNumber: 1,
       completedSteps: [],
@@ -76,8 +74,6 @@ class MultiStepForm extends Component {
   render() {
     const { completedSteps, curStepNumber, numOfSteps } = this.state;
     const { handleSubmit, saveError, steps } = this.props;
-
-    console.debug('state', this.state, 'props', this.props);
 
     return (
       <section className="multi-step-form">
