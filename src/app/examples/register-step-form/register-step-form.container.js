@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { change as reduxFormChange, reduxForm } from 'redux-form';
 import Loading from '../../vendor/loading/loading';
 import { MultiStepForm } from '../../redux-form-ext/index';
 import validate from '../validate';
 import { save, resetSaveState } from './actions';
-import Step1 from './step1';
-import Step2 from './step2';
+import StepAccountType from './step.account-type';
+import StepAccount from './step.account';
+import StepAdditionalDetails from './step.additional-details';
+import StepConfirm from './step.confirm';
+import StepLogin from './step.login';
+
+// the name of the multi-step form
+const FORM_NAME = 'register-step-form';
 
 class RegisterStepForm extends Component {
   render() {
-    const {handleSubmit, handleSave, handleResetSaveState, isSaving, isSaveCompleted, saveError} = this.props;
+    const {handleSubmit, handleSave, handleResetSaveState, handleUpdateField, isSaving, isSaveCompleted, saveError, syncErrors } = this.props;
     const steps = [
-      <MultiStepForm.Step title="Login"><Step1 /></MultiStepForm.Step>,
-      <MultiStepForm.Step title="Account"><Step2 /></MultiStepForm.Step>
+      <StepLogin title="Login" />,
+      <StepAccount title="Account" />,
+      <StepAccountType title="Account Type" handleUpdateField={handleUpdateField} />,
+      <StepAdditionalDetails title="Additional Details" />,
+      <StepConfirm title="Confirm" />,
     ];
 
     if (isSaving) {
@@ -46,7 +55,7 @@ class RegisterStepForm extends Component {
         <header>
           <h1>Multi Step Registration</h1>
         </header>
-        <MultiStepForm handleSubmit={handleSubmit} handleSave={handleSave} saveError={saveError} steps={steps} />
+        <MultiStepForm handleSubmit={handleSubmit} handleSave={handleSave} saveError={saveError} steps={steps} errors={syncErrors} />
       </section>
     );
   }
@@ -65,14 +74,18 @@ const mapStateToProps = (state) => {
     initialValues: Object.assign({}, state.user.defaultModel),
     isSaving: state.stepForm.isSaving,
     isSaveCompleted: state.stepForm.isSaveCompleted,
-    saveError: state.stepForm.error
+    saveError: state.stepForm.error,
+    syncErrors: state.form[FORM_NAME].syncErrors,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleResetSaveState: () => { dispatch(resetSaveState()) },
-    handleSave: (user) => { dispatch(save(user)) }
+    handleSave: (user) => { dispatch(save(user, FORM_NAME)) },
+    handleUpdateField: (field, values) => {
+      dispatch(reduxFormChange(FORM_NAME, field, values));
+    }
   };
 };
 
@@ -92,6 +105,6 @@ const FormContainer = connect(
 )(RegisterStepForm);
 
 export default reduxForm({
-  form: 'register-step-form',
+  form: FORM_NAME,
   validate: validate
 })(FormContainer);

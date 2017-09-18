@@ -22,7 +22,16 @@ const renderNotification = (touched, error, warning) => {
 
 class renderField extends Component {  
   render() {
-    const {input, label, labelDisclaimer, isLabelInline, placeholder, type, meta: {dirty, touched, error, warning, valid}} = this.props;
+    const {
+      autoFocus, 
+      input, 
+      label, 
+      labelDisclaimer, 
+      isLabelInline, 
+      placeholder, 
+      type, 
+      meta: {dirty, touched, error, warning, valid}
+    } = this.props;
 
     const inputStyles = classNames(
       'form-control',
@@ -48,7 +57,7 @@ class renderField extends Component {
             <span className="disclaimer">{labelDisclaimer}</span>
           </label>
           <div className="col-md-9 no-side-padding input-wrapper">
-            <input {...input} type={type} className={inputStyles} placeholder={placeholder} />
+            <input autoFocus={autoFocus} {...input} type={type} className={inputStyles} placeholder={placeholder} />
             <span className={inputStateIconStyles}></span>
             {renderNotification(touched, error, warning) }
           </div>
@@ -64,7 +73,7 @@ class renderField extends Component {
         </label>
         <div className="input-wrapper">
           <span className={inputStateIconStyles}></span>
-          <input {...input} type={type} className={inputStyles} placeholder={placeholder} />
+          <input autoFocus={autoFocus} {...input} type={type} className={inputStyles} placeholder={placeholder} />
           {renderNotification(touched, error, warning) }
         </div>
       </div>
@@ -72,13 +81,14 @@ class renderField extends Component {
   }
 }
 
-const Phone = ({reduxFormChange, label, labelDisclaimer, name, isLabelInline, placeholder, type, validate}) => (
+const Phone = (props) => (
   <div>
-    <Field normalize={Normalize.phone} name={name} type={type} labelDisclaimer={labelDisclaimer} placeholder={placeholder} component={renderField} label={label} isLabelInline={isLabelInline} validate={validate} />
+    <Field normalize={Normalize.phone} component={renderField} {...props} />
   </div>
 );
 
 Phone.propTypes = {
+  autoFocus: PropTypes.bool,
   label: PropTypes.string.isRequired,
   labelDisclaimer: PropTypes.any,
   name: PropTypes.string.isRequired,
@@ -89,6 +99,7 @@ Phone.propTypes = {
 };
 
 Phone.defaultProps = {
+  autoFocus: false,
   labelDisclaimer: '',
   placeholder: '',
   isLabelInline: true,

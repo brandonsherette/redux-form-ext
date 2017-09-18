@@ -1,5 +1,5 @@
 ol.multi-step-breadcrumb {
-  $item-width: 150px;
+  $item-width: 175px;
   $line-height: 24px;
   list-style: none;
 
@@ -43,9 +43,17 @@ ol.multi-step-breadcrumb {
     display: none;
   }
 
+  li.active-item {
+    color: $color-primary;
+  }
+
   li.active:before,
   li.active:after {
     background-color: $color-primary;
+    color: $color-white;
+  }
+  li.invalid:after {
+    background-color: $color-danger;
     color: $color-white;
   }
 

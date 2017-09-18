@@ -21,7 +21,17 @@ const renderNotification = (touched, error, warning) => {
 
 class renderField extends Component {
   render() {
-    const {input, label, labelDisclaimer, isLabelInline, placeholder, type, maxLength, meta: {dirty, touched, error, warning, valid}} = this.props;
+    const {
+      autoFocus, 
+      input, 
+      label, 
+      labelDisclaimer, 
+      isLabelInline, 
+      placeholder, 
+      type, 
+      maxLength, 
+      meta: {dirty, touched, error, warning, valid}
+    } = this.props;
 
     const inputStyles = classNames(
       'form-control',
@@ -47,7 +57,7 @@ class renderField extends Component {
             <span className="disclaimer">{labelDisclaimer}</span>
           </label>
           <div className="col-md-9 no-side-padding input-wrapper">
-            <input {...input} maxLength={maxLength} type={type} className="form-control" placeholder={placeholder} />
+            <textarea autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className="form-control" placeholder={placeholder}></textarea>
             <span className={inputStateIconStyles}></span>
             {renderNotification(touched, error, warning) }
           </div>
@@ -63,7 +73,7 @@ class renderField extends Component {
         </label>
         <div className="input-wrapper">
           <span className={inputStateIconStyles}></span>
-          <textarea {...input} maxLength={maxLength} type={type} className={inputStyles} placeholder={placeholder}></textarea>
+          <textarea autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className={inputStyles} placeholder={placeholder}></textarea>
           {renderNotification(touched, error, warning) }
         </div>
       </div>
@@ -71,13 +81,14 @@ class renderField extends Component {
   }
 }
 
-const TextArea = ({label, labelDisclaimer, maxLength, name, normalize, isLabelInline, placeholder, type, validate}) => (
+const TextArea = (props) => (
   <div>
-    <Field normalize={normalize} name={name} type={type} maxLength={maxLength} labelDisclaimer={labelDisclaimer} placeholder={placeholder} component={renderField} label={label} isLabelInline={isLabelInline} validate={validate} />
+    <Field {...props} component={renderField} />
   </div>
 );
 
 TextArea.propTypes = {
+  autoFocus: PropTypes.bool,
   label: PropTypes.string.isRequired,
   labelDisclaimer: PropTypes.any,
   maxLength: PropTypes.string,
@@ -90,6 +101,7 @@ TextArea.propTypes = {
 };
 
 TextArea.defaultProps = {
+  autoFocus: false,
   labelDisclaimer: '',
   maxLength: null,
   placeholder: '',

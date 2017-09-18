@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 
 class SelectList extends Component {
   render() {
-    const { label, labelHint, input, options, meta: { dirty, touched, error, warning, valid } } = this.props;
+    const { autoFocus, label, labelHint, input, options, meta: { dirty, touched, error, warning, valid } } = this.props;
     const labelStyles = classNames(
       'col-md-3',
       'block',
@@ -32,7 +32,7 @@ class SelectList extends Component {
           <span className="disclaimer label-hint">{labelHint}</span>
         </label>
         <div className={inputWrapperStyles}>
-          <select className="form-control" {...input}>
+          <select autoFocus={autoFocus} className="form-control" {...input}>
             {options.map((o) => (
               <option key={o.value} value={o.value}>{o.name}</option>
             ))}
@@ -44,11 +44,12 @@ class SelectList extends Component {
   }
 }
 
-const FieldSelectList = ({ label, labelHint, name, options, validate }) => (
-  <Field name={name} label={label} labelHint={labelHint} component={SelectList} type="input" options={options} validate={validate} />
+const FieldSelectList = (props) => (
+  <Field {...props} component={SelectList} type="input" />
 );
 
 FieldSelectList.propTypes = {
+  autoFocus: PropTypes.bool,
   label: PropTypes.string,
   labelHint: PropTypes.node,
   name: PropTypes.string.isRequired,
@@ -57,6 +58,7 @@ FieldSelectList.propTypes = {
 };
 
 FieldSelectList.defaultProps = {
+  autoFocus: false,
   label: '',
   validate: []
 };
