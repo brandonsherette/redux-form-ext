@@ -3,6 +3,13 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.3.0**
+- Refactored Form Components.
+- Added autoFocus prop to many form components.
+- Updated Multi Step Form Example.
+- Updated Multi Step Form Component to now properly show errors in breadcrumb when error occurs in a different step.
+- ReFactored Multi Step Form to better deal with each steps state.
+
 **v0.2.1**
 - Updated SelectListAdv reduxFormChange to now properly send correct data to the redux change method.
 - Updated styling for SelectListAdv.
@@ -161,33 +168,35 @@ import { FormComponents } from 'redux-form-ext';
 - Phone
   - Phone text field with auto US phone normalization.
   - Props
-    - label (required)
-    - labelDisclaimer (optional)
-    - name (required)
-    - placeholder (optional)
-    - isLabelInline (optional defaults to true)
+    - autoFocus: Boolean (optional)
+    - label: String (required)
+    - labelDisclaimer: String (optional)
+    - name: String (required)
+    - placeholder: String (optional)
+    - isLabelInline: Boolean (optional defaults to true)
 - RadioGroup
   - Props
-    - className (optional)
-    - groupName (required)
-    - options (required)
+    - className: String (optional)
+    - groupName: String (required)
+    - options: Array<Object> (required)
       - ArrayOfObjects
         - name (required)
           - The Display Name.
         - value (required)
-    - isRequired (optional)
-    - fieldsToResetOnChange (optional)
+    - isRequired: Boolean (optional)
+    - fieldsToResetOnChange: Array<Object> (optional)
       - ArrayOfObjects
         - name (required)
           - The Display Name.
         - value (required)
 - SelectList
   - Props
-    - label (optional)
-    - labelHint (optional)
+    - autoFocus: Boolean (optional defaults to false)
+    - label: String (optional)
+    - labelHint: Node (optional)
       - Used to add font awesome icons and click actions to open up tooltips or modals with additional information.
-    - name (required)
-    - options (required)
+    - name: String (required)
+    - options: Array<Object> (required)
       - ArrayOfObjects
         - name (required)
           - The Display Name.
@@ -222,13 +231,14 @@ import { FormComponents } from 'redux-form-ext';
     ```
 - SelectListAdv
   - Props
-    - label (optional)
-    - labelDisclaimer (optional)
-    - isLabelInline (optional defaults to true)
-    - name (required)
-    - reduxFormChange (required)
+    - autoFocus: Boolean (optional)
+    - label: String (optional)
+    - labelDisclaimer: String (optional)
+    - isLabelInline: Boolean (optional defaults to true)
+    - name: String (required)
+    - reduxFormChange: Function (required)
       - A way to dispatch redux-form change action.
-    - options (required)
+    - options: Array<Object> (required)
       - ArrayOfObjects
         - label (required)
           - The Display Name.
@@ -318,37 +328,39 @@ import { FormComponents } from 'redux-form-ext';
       - Event to trigger when there is a value changed.
 - TextArea
   - Props
-    - label (required)
-    - labelDisclaimer (optional)
-    - maxLength (optional)
-    - name (required)
-    - normalize (optional)
+    - autoFocus: Boolean (optional defaults to false)
+    - label: String (required)
+    - labelDisclaimer: String (optional)
+    - maxLength: Int (optional)
+    - name: String (required)
+    - normalize: Function (optional)
       - Function to normalize the value (use ReduxFormExt Normalize class).
-    - placeholder (optional)
-    - isLabelInline (optional defaults to true)
+    - placeholder: String (optional)
+    - isLabelInline: Boolean (optional defaults to true)
 - Text
   - Props
-    - label (required)
-    - labelDisclaimer (optional)
-    - maxLength (optional)
-    - name (required)
-    - normalize (optional)
+    - autoFocus: Boolean (optional defaults to false)
+    - label: String (required)
+    - labelDisclaimer: String (optional)
+    - maxLength: Int (optional)
+    - name: String (required)
+    - normalize: Function (optional)
       - Function to normalize the value (use ReduxFormExt Normalize class).
-    - placeholder (optional)
-    - isLabelInline (optional defaults to true)
-    - type (optional defaults to 'text', other option is 'password')
+    - placeholder:String (optional)
+    - isLabelInline: Boolean (optional defaults to true)
+    - type: String (optional defaults to 'text', other option is 'password')
 - ToggleGroup
   - Props
-    - className (optional)
-    - groupName (required)
-    - label (optional)
-    - labelHint (optional)
-    - options (required)
+    - className: String (optional)
+    - groupName: String (required)
+    - label: String (optional)
+    - labelHint: Node (optional)
+    - options: Array<Object> (required)
       - ArrayOfObjects
         - name (required)
           - The Display Name.
         - value
-    - fieldsToResetOnChange
+    - fieldsToResetOnChange: Array
   - Example
     ```javascript
     <FormComponents.ToggleGroup
@@ -385,7 +397,8 @@ import { FormComponents } from 'redux-form-ext';
     ```
 - USStateList
   - Props
-    - reduxFormChange (required)
+    - autoFocus: Boolean (optional defaults to false)
+    - reduxFormChange: Function (required)
       - Method to dispatch a change event to redux-form.
 
 ## Examples
@@ -638,7 +651,7 @@ import { FormComponents, Normalize } from 'redux-form-ext';
 
 const Step1 = () => (
   <div>
-    <FormComponents.Text label="* Email" placeholder="Email" name="email" isLabelInline={false} />
+    <FormComponents.Text autoFocus={true} label="* Email" placeholder="Email" name="email" isLabelInline={false} />
     <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
   </div>
 );
@@ -653,7 +666,7 @@ import { FormComponents, Normalize } from '../../redux-form-ext/index';
 
 const Step2 = () => (
   <div>
-    <FormComponents.Text normalize={Normalize.name} label="* Firstname" placeholder="Firstname" name="firstname" isLabelInline={false} />
+    <FormComponents.Text autoFocus={true} normalize={Normalize.name} label="* Firstname" placeholder="Firstname" name="firstname" isLabelInline={false} />
     <FormComponents.Text normalize={Normalize.name} label="* Lastname" placeholder="Lastname" name="lastname" isLabelInline={false} />
     <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
   </div>

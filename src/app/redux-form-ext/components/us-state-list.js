@@ -69,12 +69,17 @@ states.forEach((state) => {
   });
 });
 
-const USStateList = ({reduxFormChange}) => (
-  <SelectList label="State" name="state" isLabelInline={false} reduxFormChange={reduxFormChange} options={options}></SelectList>
+const USStateList = ({autoFocus, reduxFormChange}) => (
+  <SelectList autoFocus={autoFocus} label="State" name="state" isLabelInline={false} reduxFormChange={reduxFormChange} options={options}></SelectList>
 );
 
 USStateList.propTypes = {
+  autoFocus: PropTypes.bool.isRequired,
   reduxFormChange: PropTypes.func.isRequired
+};
+
+USStateList.defaultProps = {
+  autoFocus: false
 };
 
 export default USStateList;

@@ -14,7 +14,16 @@ class SelectList extends Component {
   }
 
   render() {
-    const { label, labelDisclaimer, input, options, isLabelInline, meta, meta: {dirty, touched, error, warning, valid} } = this.props;
+    const { 
+      autoFocus, 
+      label, 
+      labelDisclaimer, 
+      input, 
+      options, 
+      isLabelInline, 
+      meta, 
+      meta: {dirty, touched, error, warning, valid} 
+    } = this.props;
     const inputStyles = classNames(
       'form-control-select',
       {
@@ -31,7 +40,7 @@ class SelectList extends Component {
             <span className="disclaimer">{labelDisclaimer}</span>
           </label>
           <div className="col-md-9 col-sm-9 col-xs-12 px-0">
-            <Select className={inputStyles} options={options} name={input.name} value={input.value} onChange={(option) => { this.handleChange(option) } } />
+            <Select autoFocus={autoFocus} className={inputStyles} options={options} name={input.name} value={input.value} onChange={(option) => { this.handleChange(option) } } />
             {renderNotification(touched, error, warning) }
           </div>
         </div>
@@ -45,7 +54,7 @@ class SelectList extends Component {
           <span className="disclaimer">{labelDisclaimer}</span>
         </label>
         <div className="">
-          <Select className={inputStyles} options={options} name={input.name} value={input.value} onChange={(option) => { this.handleChange(option) } } />
+          <Select autoFocus={autoFocus} className={inputStyles} options={options} name={input.name} value={input.value} onChange={(option) => { this.handleChange(option) } } />
           {renderNotification(touched, error, warning) }
         </div>
       </div>
@@ -53,11 +62,12 @@ class SelectList extends Component {
   }
 }
 
-const FieldSelectList = ({label, labelDisclaimer, isLabelInline, name, options, reduxFormChange, validate}) => (
-  <Field name={name} label={label} reduxFormChange={reduxFormChange} labelDisclaimer={labelDisclaimer} isLabelInline={isLabelInline} component={SelectList} type="input" options={options} validate={validate} />
+const FieldSelectList = (props) => (
+  <Field {...props} component={SelectList} type="input" />
 );
 
 FieldSelectList.propTypes = {
+  autoFocus: PropTypes.bool,
   label: PropTypes.string,
   labelDisclaimer: PropTypes.string,
   isLabelInline: PropTypes.bool,
@@ -68,6 +78,7 @@ FieldSelectList.propTypes = {
 };
 
 FieldSelectList.defaultProps = {
+  autoFocus: false,
   label: '',
   labelDisclaimer: '',
   isLabelInline: true,
