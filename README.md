@@ -183,18 +183,17 @@ export default reduxForm({
 
 #### RadioGroup
 - Props
-    - className: String (optional)
-    - groupName: String (required)
-    - options: Array<Object> (required)
-      - ArrayOfObjects
-        - name (required)
-          - The Display Name.
-        - value (required)
-    - isRequired: Boolean (optional)
-    - fieldsToResetOnChange: Array<Object> (optional)
-      - name (required)
-        - The Display Name.
-      - value (required)
+  - className: String (optional)
+  - groupName: String (required)
+  - options: ArrayOfObjects (required)
+    - name (required)
+      - The Display Name.
+    - value (required)
+  - isRequired: Boolean (optional)
+  - fieldsToResetOnChange: ArrayOfObjects (optional)
+    - name (required)
+      - The Display Name.
+    - value (required)
 
 #### SelectList
 - Props
