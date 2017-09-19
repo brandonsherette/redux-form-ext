@@ -543,9 +543,21 @@ import StepAccount from './step.account';
 
 require('redux-form-ext/dist/redux-form-ext.css');
 
+const FORM_NAME = 'register-step-form';
+
 class RegisterStepForm extends Component {
   render() {
-    const {handleSubmit, handleSave, handleResetSaveState, isSaving, isSaveCompleted, saveError} = this.props;
+    const { 
+      handleSubmit, 
+      handleSave, 
+      handleResetSaveState, 
+      isSaving, 
+      isSaveCompleted, 
+      saveError, 
+      formSyncErrors 
+    } = this.props;
+    
+    // configure steps
     const steps = [
       <StepLogin title="Login" />,
       <StepAccount title="Account" />,
@@ -580,7 +592,7 @@ class RegisterStepForm extends Component {
         <header>
           <h1>Multi Step Registration</h1>
         </header>
-        <MultiStepForm handleSubmit={handleSubmit} handleSave={handleSave} saveError={saveError} steps={steps} />
+        <MultiStepForm handleSubmit={handleSubmit} handleSave={handleSave} saveError={saveError} steps={steps} errors={formSyncErrors} />
       </section>
     );
   }
@@ -596,6 +608,7 @@ RegisterStepForm.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    formSyncErrors: (state.form[FORM_NAME]) ? state.form[FORM_NAME].syncErrors : null,
     initialValues: Object.assign({}, state.user.defaultModel),
     isSaving: state.stepForm.isSaving,
     isSaveCompleted: state.stepForm.isSaveCompleted,
@@ -616,7 +629,7 @@ const FormContainer = connect(
 )(RegisterStepForm);
 
 export default reduxForm({
-  form: 'register-step-form',
+  form: FORM_NAME,
   validate: validate
 })(FormContainer);
 ```
