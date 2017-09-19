@@ -192,14 +192,9 @@ export default reduxForm({
         - value (required)
     - isRequired: Boolean (optional)
     - fieldsToResetOnChange: Array<Object> (optional)
-      - ArrayOfObjects
-        - name (required)
-          - The Display Name.
-        - value (required)
-      -
-    -
-  -
--
+      - name (required)
+        - The Display Name.
+      - value (required)
 
 #### SelectList
 - Props
