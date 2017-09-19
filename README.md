@@ -3,6 +3,9 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.4.0**
+- Fixed issue with Multi Step Form breadcrumb state not updating correctly.
+
 **v0.3.0**
 - Refactored Form Components.
 - Added autoFocus prop to many form components.
@@ -535,8 +538,8 @@ import { reduxForm } from 'redux-form';
 import { MultiStepForm } from 'redux-form-ext';
 import validate from './validate';
 import { save, resetSaveState } from './actions';
-import Step1 from './step1';
-import Step2 from './step2';
+import StepLogin from './step.login';
+import StepAccount from './step.account';
 
 require('redux-form-ext/dist/redux-form-ext.css');
 
@@ -544,8 +547,8 @@ class RegisterStepForm extends Component {
   render() {
     const {handleSubmit, handleSave, handleResetSaveState, isSaving, isSaveCompleted, saveError} = this.props;
     const steps = [
-      <MultiStepForm.Step title="Login"><Step1 /></MultiStepForm.Step>,
-      <MultiStepForm.Step title="Account"><Step2 /></MultiStepForm.Step>
+      <StepLogin title="Login" />,
+      <StepAccount title="Account" />,
     ];
 
     if (isSaving) {
@@ -644,35 +647,41 @@ const validate = (values) => {
 export default validate;
 ```
 
-### step1.js
+### step.login.js
 ```javascript
 import React from 'react';
-import { FormComponents, Normalize } from 'redux-form-ext';
+import { FormComponents, MultiStepForm, Normalize } from 'redux-form-ext';
 
-const Step1 = () => (
-  <div>
+const StepLogin = (props) => (
+  <MultiStepForm.Step {...props}>
     <FormComponents.Text autoFocus={true} label="* Email" placeholder="Email" name="email" isLabelInline={false} />
     <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
-  </div>
+  </MultiStepForm.Step>
 );
 
-export default Step1;
+// helps determine if this specific step is invalid
+StepLogin.formInputs = ['email', 'password'];
+
+export default StepLogin;
 ```
 
-### step2.js
+### step.account.js
 ```javascript
 import React from 'react';
-import { FormComponents, Normalize } from '../../redux-form-ext/index';
+import { FormComponents, MultiStepForm, Normalize } from '../../redux-form-ext/index';
 
-const Step2 = () => (
-  <div>
+const StepAccount = (props) => (
+  <MultiStepForm.Step {...props}>
     <FormComponents.Text autoFocus={true} normalize={Normalize.name} label="* Firstname" placeholder="Firstname" name="firstname" isLabelInline={false} />
     <FormComponents.Text normalize={Normalize.name} label="* Lastname" placeholder="Lastname" name="lastname" isLabelInline={false} />
     <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
-  </div>
+  </MultiStepForm.Step>
 );
 
-export default Step2;
+// helps determine if this specific step is invalid
+StepAccount.formInputs = ['firstname', 'lastname', 'phone'];
+
+export default StepAccount;
 ```
 
 ## CSS

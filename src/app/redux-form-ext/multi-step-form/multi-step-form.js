@@ -14,26 +14,8 @@ class MultiStepForm extends Component {
     this.state = {
       curStepIndex: 0,
       numOfSteps: props.steps.length,
-      stepProgress: this.initStepProgress(),
+      stepsTouched: [],
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // need to re-evaluate all steps
-    // need to loop through each step progress in reverse order to get proper evaluation of isDisabled property
-    // due to the step can be disabled if a previous step is disabled
-    let nextStepProgress = [...this.state.stepProgress];
-    let x = nextStepProgress.length - 1;
-    while(x >= 0) {
-      nextStepProgress[x] = this.evalStep(x, nextProps);
-
-      // decrement x
-      x -= 1;
-    }
-
-    this.setState({
-      stepProgress: nextStepProgress
-    });
   }
 
   evalSubmit(values) {
@@ -50,69 +32,39 @@ class MultiStepForm extends Component {
     }
   }
 
-  evalStep(stepIndex, props) {
-    const { curStepIndex, stepProgress } = this.state;
-    const StepComponent = props.steps[stepIndex];
-    const isStepInvalid = this.isStepInvalid(StepComponent.type.formInputs, props.errors);
-    const nextStepProgress = [...stepProgress];
-    const isActive = this.isStepActive(stepIndex);
-
+  evalStep(stepIndex, StepComponent, errors) {
+    const { curStepIndex, stepsTouched } = this.state;
+    const isTouched = stepsTouched[stepIndex];
+    const isInvalid = this.isStepInvalid(StepComponent.type.formInputs, errors);
+    const isActive = (stepIndex <= curStepIndex || isTouched);
+    const isDisabled = this.isStepNavDisabled(stepIndex, isActive);
+    
     // make sure to update current step for being touched
     // subtract 1 from stup number to get the index
-    return Object.assign({}, nextStepProgress[stepIndex], {
+    return {
       isActive,
-      isValid: !isStepInvalid,
-      isInvalid: isStepInvalid,
-      isDisabled: this.isStepNavDisabled(stepIndex, isActive),
-    });
+      isValid: !isInvalid,
+      isInvalid,
+      isTouched,
+      isDisabled,
+    };
   }
 
   gotoStep(stepIndex) {
-    const { curStepIndex, stepProgress } = this.state;
-    const nextStepProgress = [...this.state.stepProgress];
-
-    // make sure to update current step for being touched
-    // subtract 1 from stup number to get the index
-    nextStepProgress[curStepIndex] = Object.assign({}, this.evalStep(curStepIndex, this.props), {
-      isTouched: true,
-    });
+    const stepsTouched = [...this.state.stepsTouched];
+    stepsTouched[this.state.curStepIndex] = this.state.curStepIndex;
+    stepsTouched[stepIndex] = stepIndex;
 
     this.setState({
       curStepIndex: stepIndex,
-      stepProgress: nextStepProgress
+      stepsTouched,
     });
   }
 
-  handleCrumbClick(stepIndex) {
-    const stepProgress = Object.assign({}, this.state.stepProgress[stepIndex]);
-
-    if (!stepProgress.isDisabled) {
+  handleCrumbClick(stepIndex, isDisabled) {
+    if (!isDisabled) {
       this.gotoStep(stepIndex);
     }
-  }
-
-  initStepProgress() {
-    const stepProgress = this.props.steps.map((StepComponent, index) => {
-      const stepNumber = index + 1;
-      const isInvalid = this.isStepInvalid(StepComponent.type.formInputs, this.props.errors);
-
-      return {
-        isActive: (index === 0) ? true : false,
-        isDisabled: true,
-        isTouched: (index == 0) ? true : false,
-        isInvalid,
-        isValid: !isInvalid,
-        stepNumber,
-      }
-    });
-
-    return stepProgress;
-  }
-
-  isStepActive(stepIndex) {
-    const stepProgress = Object.assign({}, this.state.stepProgress[stepIndex]);
-
-    return (stepIndex <= this.state.curStepIndex || stepProgress.isTouched);
   }
 
   isStepInvalid(formInputs, errors) {
@@ -140,8 +92,7 @@ class MultiStepForm extends Component {
   }
 
   isStepNavDisabled(stepIndex, isStepActive) {
-    const { curStepIndex, stepProgress } = this.state;
-    const curStepProgress = stepProgress[stepIndex];
+    const { curStepIndex } = this.state;
 
     // is disabled when one of the following occurs
     // 1. Isn't active or is current step.
@@ -152,7 +103,7 @@ class MultiStepForm extends Component {
 
     // need to loop through each previous steps to see if form is invalid
     for (let x = 0; x < stepIndex; x += 1) {
-      if (stepProgress[x].isInvalid) {
+      if (this.isStepInvalid(this.props.steps[x].type.formInputs, this.props.errors)) {
         return true;
       }
     }
@@ -162,7 +113,7 @@ class MultiStepForm extends Component {
   }
 
   render() {
-    const { completedSteps, curStepIndex, numOfSteps } = this.state;
+    const { curStepIndex, numOfSteps } = this.state;
     const { handleSubmit, saveError, saveLabel, steps } = this.props;
 
     return (
@@ -198,7 +149,7 @@ class MultiStepForm extends Component {
   renderStep(StepComponent, stepIndex) {
     // StepComponent needs title to create proper key
     if (!StepComponent.props.title) {
-      throw 'Step Component requires title property.';
+      throw 'Step Component (' + StepComponent.type.name + ') requires title property.';
     }
 
     const { curStepIndex } = this.state;
@@ -217,10 +168,11 @@ class MultiStepForm extends Component {
   renderStepBreadcrumb(StepComponent, stepIndex) {
     // StepComponent needs title to create proper key
     if (!StepComponent.props.title) {
-      throw 'Step Component requires title property.';
+      throw 'Step Component (' + StepComponent.type.name + ') requires title property.';
     }
     
-    const stepProgress = Object.assign({}, this.state.stepProgress[stepIndex]);
+    const { errors } = this.props;
+    const stepProgress = this.evalStep(stepIndex, StepComponent, errors);
 
     const { curStepIndex } = this.state;
     const stepTitle = StepComponent.props.title;
@@ -238,7 +190,7 @@ class MultiStepForm extends Component {
     );
 
     return (
-      <li key={Util.convertToSlug(stepTitle)} className={stepStyles} disabled={isStepDisabled} role={!isStepDisabled ? 'button' : ''} onClick={this.handleCrumbClick.bind(this, stepIndex) }>{stepTitle}</li>
+      <li key={Util.convertToSlug(stepTitle)} className={stepStyles} disabled={isStepDisabled} role={!isStepDisabled ? 'button' : ''} onClick={this.handleCrumbClick.bind(this, stepIndex, isStepDisabled) }>{stepTitle}</li>
     )
   }
 }
