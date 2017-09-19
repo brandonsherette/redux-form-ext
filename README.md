@@ -201,11 +201,10 @@ export default reduxForm({
   - labelHint: Node (optional)
     - Used to add font awesome icons and click actions to open up tooltips or modals with additional information.
   - name: String (required)
-  - options: Array<Object> (required)
-    - ArrayOfObjects
-      - name (required)
-        - The Display Name.
-      - value (required)
+  - options: ArrayOfObjects (required)
+    - name (required)
+      - The Display Name.
+    - value (required)
 - Example
 ```javascript
 <FormComponents.SelectList 
@@ -244,11 +243,10 @@ export default reduxForm({
   - name: String (required)
   - reduxFormChange: Function (required)
     - A way to dispatch redux-form change action.
-  - options: Array<Object> (required)
-    - ArrayOfObjects
-      - label (required)
-        - The Display Name.
-      - value (required)
+  - options: ArrayOfObjects (required)
+    - label (required)
+      - The Display Name.
+    - value (required)
 - Example
 ```javascript
 import React, { Component } from 'react';
@@ -365,11 +363,10 @@ export default reduxForm({
   - groupName: String (required)
   - label: String (optional)
   - labelHint: Node (optional)
-  - options: Array<Object> (required)
-    - ArrayOfObjects
-      - name (required)
-        - The Display Name.
-      - value
+  - options: ArrayOfObjects (required)
+    - name (required)
+      - The Display Name.
+    - value
   - fieldsToResetOnChange: Array
 - Example
 ```javascript
