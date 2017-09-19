@@ -107,25 +107,24 @@ import { FormComponents } from 'redux-form-ext';
 - Needs intialValues the have an array with the name of the checkbox group to be able to do array type actions.
 - updateField passes in fieldName and values
 - Props
-  - className (optional)
-  - limit (optional)
-  - name (required)
-  - updateField (required)
+  - className: String (optional)
+  - limit: Int (optional)
+  - name: String (required)
+  - updateField: Function (required)
     - Helps notify redux-form about the full collection of changes made as a group.
     - Example
       ```javascript
       updateField={(fieldName, values) => { reduxFormChange('nameOfForm', fieldName, values) }}
       ```
     - reduxFormChange will then dispatch the redux change event
-  - options (required)
+  - options: (required)
     - ArrayOfObjects
       - name (required)
         - The Display Name.
       - subtitle (optional)
       - value (required)
       - className (optional)
-
-#### CheckboxGroup Example
+- Example
 ```javascript
 import React, { Component } from 'react';
 import { change, reduxForm } from 'redux-form';
@@ -207,8 +206,7 @@ export default reduxForm({
       - name (required)
         - The Display Name.
       - value (required)
-
-#### SelectList Example 
+- Example
 ```javascript
 <FormComponents.SelectList 
   name="accountType" 
