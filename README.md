@@ -168,6 +168,7 @@ import { FormComponents } from 'redux-form-ext';
       'form': 'myFormName'
     });
     ```
+    
 - Phone
   - Phone text field with auto US phone normalization.
   - Props
@@ -177,6 +178,7 @@ import { FormComponents } from 'redux-form-ext';
     - name: String (required)
     - placeholder: String (optional)
     - isLabelInline: Boolean (optional defaults to true)
+
 - RadioGroup
   - Props
     - className: String (optional)
@@ -192,6 +194,7 @@ import { FormComponents } from 'redux-form-ext';
         - name (required)
           - The Display Name.
         - value (required)
+
 - SelectList
   - Props
     - autoFocus: Boolean (optional defaults to false)
@@ -232,6 +235,7 @@ import { FormComponents } from 'redux-form-ext';
       )}
     />
     ```
+
 - SelectListAdv
   - Props
     - autoFocus: Boolean (optional)
@@ -315,6 +319,7 @@ import { FormComponents } from 'redux-form-ext';
       }
     })(MyFormContainer);
     ```
+
 - SliderGroup
   - Props
     - capValue (required)
@@ -329,6 +334,7 @@ import { FormComponents } from 'redux-form-ext';
         - fieldName (required)
     - triggerFieldChange (required)
       - Event to trigger when there is a value changed.
+
 - TextArea
   - Props
     - autoFocus: Boolean (optional defaults to false)
@@ -340,6 +346,7 @@ import { FormComponents } from 'redux-form-ext';
       - Function to normalize the value (use ReduxFormExt Normalize class).
     - placeholder: String (optional)
     - isLabelInline: Boolean (optional defaults to true)
+
 - Text
   - Props
     - autoFocus: Boolean (optional defaults to false)
@@ -352,6 +359,7 @@ import { FormComponents } from 'redux-form-ext';
     - placeholder:String (optional)
     - isLabelInline: Boolean (optional defaults to true)
     - type: String (optional defaults to 'text', other option is 'password')
+
 - ToggleGroup
   - Props
     - className: String (optional)
@@ -398,6 +406,7 @@ import { FormComponents } from 'redux-form-ext';
       ]}
     />
     ```
+
 - USStateList
   - Props
     - autoFocus: Boolean (optional defaults to false)
