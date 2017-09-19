@@ -102,85 +102,86 @@ import { FormComponents } from 'redux-form-ext';
 ```
 
 ### Available Components
-- CheckboxGroup
-  - Needs intialValues the have an array with the name of the checkbox group to be able to do array type actions.
-  - updateField passes in fieldName and values
-  - Props
-    - className (optional)
-    - limit (optional)
-    - name (required)
-    - updateField (required)
-      - Helps notify redux-form about the full collection of changes made as a group.
-      - Example
-        ```javascript
-        updateField={(fieldName, values) => { reduxFormChange('nameOfForm', fieldName, values) }}
-        ```
-      - reduxFormChange will then dispatch the redux change event
-    - options (required)
-      - ArrayOfObjects
-        - name (required)
-          - The Display Name.
-        - subtitle (optional)
-        - value (required)
-        - className (optional)
+
+#### CheckboxGroup
+- Needs intialValues the have an array with the name of the checkbox group to be able to do array type actions.
+- updateField passes in fieldName and values
+- Props
+  - className (optional)
+  - limit (optional)
+  - name (required)
+  - updateField (required)
+    - Helps notify redux-form about the full collection of changes made as a group.
+    - Example
+      ```javascript
+      updateField={(fieldName, values) => { reduxFormChange('nameOfForm', fieldName, values) }}
+      ```
+    - reduxFormChange will then dispatch the redux change event
+  - options (required)
+    - ArrayOfObjects
+      - name (required)
+        - The Display Name.
+      - subtitle (optional)
+      - value (required)
+      - className (optional)
   - Example
-    ```javascript
-    import React, { Component } from 'react';
-    import { change, reduxForm } from 'redux-form';
-    import { FormComponents } from 'redux-form-ext';
+  ```javascript
+  import React, { Component } from 'react';
+  import { change, reduxForm } from 'redux-form';
+  import { FormComponents } from 'redux-form-ext';
 
-    class MyForm extends Component {
-      render() {
-        var options = [
-          {
-            name: 'Option 1',
-            subtitle: 'Subtitle (Optional)',
-            value: 'option1',
-            className: 'custom-css-classes'
-          }
-        ];
+  class MyForm extends Component {
+    render() {
+      var options = [
+        {
+          name: 'Option 1',
+          subtitle: 'Subtitle (Optional)',
+          value: 'option1',
+          className: 'custom-css-classes'
+        }
+      ];
 
-        return (
-          <form onSubmit={handleSubmit}>
-            <FormComponents.CheckboxGroup className="my-custom-class" limit="4" name="myCheckboxName" updateField={(inputName, nextGroupValues) => {reduxChange(inputName, nextGroupValues)}} options={options} />
+      return (
+        <form onSubmit={handleSubmit}>
+          <FormComponents.CheckboxGroup className="my-custom-class" limit="4" name="myCheckboxName" updateField={(inputName, nextGroupValues) => {reduxChange(inputName, nextGroupValues)}} options={options} />
 
-            <button type="submit">Submit</button>
-          </form>
-        );
-      }
+          <button type="submit">Submit</button>
+        </form>
+      );
     }
+  }
 
-    const mapStateToProps = (state) => {
-      return {
-        initialValues: state.myReducer.myCurrentValues
-      };
+  const mapStateToProps = (state) => {
+    return {
+      initialValues: state.myReducer.myCurrentValues
     };
+  };
 
-    const mapDispatchToProps = (dispatch) => {
-      return {
-        reduxChange: (inputName, values) => { dispatch(change('myFormName', inputName, values))}
-      };
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      reduxChange: (inputName, values) => { dispatch(change('myFormName', inputName, values))}
     };
+  };
 
-    const Container = connect(mapStateToProps, mapDispatchToProps)(MyForm);
+  const Container = connect(mapStateToProps, mapDispatchToProps)(MyForm);
 
-    export default reduxForm({
-      'form': 'myFormName'
-    });
-    ```
-    
-- Phone
-  - Phone text field with auto US phone normalization.
-  - Props
-    - autoFocus: Boolean (optional)
-    - label: String (required)
-    - labelDisclaimer: String (optional)
-    - name: String (required)
-    - placeholder: String (optional)
-    - isLabelInline: Boolean (optional defaults to true)
+  export default reduxForm({
+    'form': 'myFormName'
+  });
+  ```
 
-- RadioGroup
-  - Props
+#### Phone
+- Phone text field with auto US phone normalization.
+- Props
+  - autoFocus: Boolean (optional)
+  - label: String (required)
+  - labelDisclaimer: String (optional)
+  - name: String (required)
+  - placeholder: String (optional)
+  - isLabelInline: Boolean (optional defaults to true)
+
+#### RadioGroup
+- Props
     - className: String (optional)
     - groupName: String (required)
     - options: Array<Object> (required)
@@ -195,223 +196,223 @@ import { FormComponents } from 'redux-form-ext';
           - The Display Name.
         - value (required)
 
-- SelectList
-  - Props
-    - autoFocus: Boolean (optional defaults to false)
-    - label: String (optional)
-    - labelHint: Node (optional)
-      - Used to add font awesome icons and click actions to open up tooltips or modals with additional information.
-    - name: String (required)
-    - options: Array<Object> (required)
-      - ArrayOfObjects
-        - name (required)
-          - The Display Name.
-        - value (required)
-  - Example
-    ```javascript
-    <FormComponents.SelectList 
-      name="accountType" 
-      options={[
-        {
-          name: 'Select Account Type',
-          value: ''
-        },
-        {
-          name: 'General',
-          value: 'general'
-        },
-        {
-          name: 'Admin',
-          value: 'admin'
-        },
-        {
-          name: 'Power User',
-          value: 'power'
-        }
-      ]}
-      label="Account Type" 
-      labelHint={(
-        <i role="button" className="fa fa-question-circle" onClick={() => { alert('Account type determines the permissions the account has.')} }></i>
-      )}
-    />
-    ```
+#### SelectList
+- Props
+  - autoFocus: Boolean (optional defaults to false)
+  - label: String (optional)
+  - labelHint: Node (optional)
+    - Used to add font awesome icons and click actions to open up tooltips or modals with additional information.
+  - name: String (required)
+  - options: Array<Object> (required)
+    - ArrayOfObjects
+      - name (required)
+        - The Display Name.
+      - value (required)
+- Example
+```javascript
+<FormComponents.SelectList 
+  name="accountType" 
+  options={[
+    {
+      name: 'Select Account Type',
+      value: ''
+    },
+    {
+      name: 'General',
+      value: 'general'
+    },
+    {
+      name: 'Admin',
+      value: 'admin'
+    },
+    {
+      name: 'Power User',
+      value: 'power'
+    }
+  ]}
+  label="Account Type" 
+  labelHint={(
+    <i role="button" className="fa fa-question-circle" onClick={() => { alert('Account type determines the permissions the account has.')} }></i>
+  )}
+/>
+```
 
-- SelectListAdv
-  - Props
-    - autoFocus: Boolean (optional)
-    - label: String (optional)
-    - labelDisclaimer: String (optional)
-    - isLabelInline: Boolean (optional defaults to true)
-    - name: String (required)
-    - reduxFormChange: Function (required)
-      - A way to dispatch redux-form change action.
-    - options: Array<Object> (required)
-      - ArrayOfObjects
-        - label (required)
-          - The Display Name.
-        - value (required)
-  - Example
-    ```javascript
-    import React, { Component } from 'react';
-    import { connect } from 'react-redux';
-    import { change as reduxFormChange, reduxForm } from 'redux-form';
-    import { FormComponents } from 'redux-form-ext';
+#### SelectListAdv
+- Props
+  - autoFocus: Boolean (optional)
+  - label: String (optional)
+  - labelDisclaimer: String (optional)
+  - isLabelInline: Boolean (optional defaults to true)
+  - name: String (required)
+  - reduxFormChange: Function (required)
+    - A way to dispatch redux-form change action.
+  - options: Array<Object> (required)
+    - ArrayOfObjects
+      - label (required)
+        - The Display Name.
+      - value (required)
+- Example
+```javascript
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { change as reduxFormChange, reduxForm } from 'redux-form';
+import { FormComponents } from 'redux-form-ext';
 
-    class MyForm extends Component {
-      render() {
-        const { handleSubmit, handleSave } = this.props;
+class MyForm extends Component {
+  render() {
+    const { handleSubmit, handleSave } = this.props;
         
-        return (
-          <form onSubmit={handleSubmit((values) => { handleSave(values) })}>
-            <FormComponents.SelectListAdv
-              label="Account Type"
-              name="accountType"
-              isLabelInline={true}
-              options={[
-                {
-                  label: 'General',
-                  value: 'general'
-                },
-                {
-                  label: 'Admin',
-                  value: 'admin'
-                },
-                {
-                  label: 'Power User',
-                  value: 'power'
-                }
-              ]}
-              reduxFormChange={reduxFormChange}
-            />
-          </form>
-        );
-      }
+    return (
+      <form onSubmit={handleSubmit((values) => { handleSave(values) })}>
+        <FormComponents.SelectListAdv
+          label="Account Type"
+          name="accountType"
+          isLabelInline={true}
+          options={[
+            {
+              label: 'General',
+              value: 'general'
+            },
+            {
+              label: 'Admin',
+              value: 'admin'
+            },
+            {
+              label: 'Power User',
+              value: 'power'
+            }
+          ]}
+          reduxFormChange={reduxFormChange}
+        />
+      </form>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    initialValues: {
+      accountType: ''
+    }
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    reduxFormChange: (field, values) => {
+      dispatch(reduxFormChange('myForm', field, values));
+    }
+  };
+};
+
+const MyFormContainer = connect(mapStateToProps, mapDispatchToProps)(MyForm);
+
+export default reduxForm({
+  form: 'myForm',
+  validate: (values) => {
+    const errors = {};
+
+    if (!values.accountType) {
+      errors.accountType = 'Required';
     }
 
-    const mapStateToProps = (state) => {
-      return {
-        initialValues: {
-          accountType: ''
-        }
-      };
-    };
+    return errors;
+  }
+})(MyFormContainer);
+```
 
-    const mapDispatchToProps = (dispatch) => {
-      return {
-        reduxFormChange: (field, values) => {
-          dispatch(reduxFormChange('myForm', field, values));
-        }
-      };
-    };
+#### SliderGroup
+- Props
+  - capValue (required)
+    - The max value the slider can allow (this is different than what it's shown, for example if 12 is shown as the max, and capValue is 6, the slider will never go pass the 6 value)
+  - groupName (required)
+    - name of the form element.
+  - max (required)
+    - max value shown to the user.
+  - options (required)
+    - ArrayOfObjects
+      - label (required)
+      - fieldName (required)
+  - triggerFieldChange (required)
+    - Event to trigger when there is a value changed.
 
-    const MyFormContainer = connect(mapStateToProps, mapDispatchToProps)(MyForm);
+#### TextArea
+- Props
+  - autoFocus: Boolean (optional defaults to false)
+  - label: String (required)
+  - labelDisclaimer: String (optional)
+  - maxLength: Int (optional)
+  - name: String (required)
+  - normalize: Function (optional)
+    - Function to normalize the value (use ReduxFormExt Normalize class).
+  - placeholder: String (optional)
+  - isLabelInline: Boolean (optional defaults to true)
 
-    export default reduxForm({
-      form: 'myForm',
-      validate: (values) => {
-        const errors = {};
+#### Text
+- Props
+  - autoFocus: Boolean (optional defaults to false)
+  - label: String (required)
+  - labelDisclaimer: String (optional)
+  - maxLength: Int (optional)
+  - name: String (required)
+  - normalize: Function (optional)
+    - Function to normalize the value (use ReduxFormExt Normalize class).
+  - placeholder:String (optional)
+  - isLabelInline: Boolean (optional defaults to true)
+  - type: String (optional defaults to 'text', other option is 'password')
 
-        if (!values.accountType) {
-          errors.accountType = 'Required';
-        }
+#### ToggleGroup
+- Props
+  - className: String (optional)
+  - groupName: String (required)
+  - label: String (optional)
+  - labelHint: Node (optional)
+  - options: Array<Object> (required)
+    - ArrayOfObjects
+      - name (required)
+        - The Display Name.
+      - value
+  - fieldsToResetOnChange: Array
+- Example
+```javascript
+<FormComponents.ToggleGroup
+  fieldsToResetOnChange={[
+    {
+      name: 'accountType',
+      value: ''
+    }
+  ]}
+  groupName="subscribe" 
+  label="Subscribe"
+  labelHint={(
+    <i 
+      role="button" 
+      className="fa fa-question-circle" 
+      onClick={() => { alert('Subscribing will allow you to get notified when new changes occur.')} }>
+    </i>
+  )}
+  options={[
+    {
+      name: 'Yes',
+      value: 'yes'
+    },
+    {
+      name: 'Maybe',
+      value: 'maybe'
+    },
+    {
+      name: 'No',
+      value: 'no'
+    }
+  ]}
+/>
+```
 
-        return errors;
-      }
-    })(MyFormContainer);
-    ```
-
-- SliderGroup
-  - Props
-    - capValue (required)
-      - The max value the slider can allow (this is different than what it's shown, for example if 12 is shown as the max, and capValue is 6, the slider will never go pass the 6 value)
-    - groupName (required)
-      - name of the form element.
-    - max (required)
-      - max value shown to the user.
-    - options (required)
-      - ArrayOfObjects
-        - label (required)
-        - fieldName (required)
-    - triggerFieldChange (required)
-      - Event to trigger when there is a value changed.
-
-- TextArea
-  - Props
-    - autoFocus: Boolean (optional defaults to false)
-    - label: String (required)
-    - labelDisclaimer: String (optional)
-    - maxLength: Int (optional)
-    - name: String (required)
-    - normalize: Function (optional)
-      - Function to normalize the value (use ReduxFormExt Normalize class).
-    - placeholder: String (optional)
-    - isLabelInline: Boolean (optional defaults to true)
-
-- Text
-  - Props
-    - autoFocus: Boolean (optional defaults to false)
-    - label: String (required)
-    - labelDisclaimer: String (optional)
-    - maxLength: Int (optional)
-    - name: String (required)
-    - normalize: Function (optional)
-      - Function to normalize the value (use ReduxFormExt Normalize class).
-    - placeholder:String (optional)
-    - isLabelInline: Boolean (optional defaults to true)
-    - type: String (optional defaults to 'text', other option is 'password')
-
-- ToggleGroup
-  - Props
-    - className: String (optional)
-    - groupName: String (required)
-    - label: String (optional)
-    - labelHint: Node (optional)
-    - options: Array<Object> (required)
-      - ArrayOfObjects
-        - name (required)
-          - The Display Name.
-        - value
-    - fieldsToResetOnChange: Array
-  - Example
-    ```javascript
-    <FormComponents.ToggleGroup
-      fieldsToResetOnChange={[
-        {
-          name: 'accountType',
-          value: ''
-        }
-      ]}
-      groupName="subscribe" 
-      label="Subscribe"
-      labelHint={(
-        <i 
-          role="button" 
-          className="fa fa-question-circle" 
-          onClick={() => { alert('Subscribing will allow you to get notified when new changes occur.')} }>
-        </i>
-      )}
-      options={[
-        {
-          name: 'Yes',
-          value: 'yes'
-        },
-        {
-          name: 'Maybe',
-          value: 'maybe'
-        },
-        {
-          name: 'No',
-          value: 'no'
-        }
-      ]}
-    />
-    ```
-
-- USStateList
-  - Props
-    - autoFocus: Boolean (optional defaults to false)
-    - reduxFormChange: Function (required)
-      - Method to dispatch a change event to redux-form.
+#### USStateList
+- Props
+  - autoFocus: Boolean (optional defaults to false)
+  - reduxFormChange: Function (required)
+    - Method to dispatch a change event to redux-form.
 
 ## Examples
 See "src/app/app.component.js" for various form examples.
