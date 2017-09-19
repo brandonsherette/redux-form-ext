@@ -124,51 +124,52 @@ import { FormComponents } from 'redux-form-ext';
       - subtitle (optional)
       - value (required)
       - className (optional)
-  - Example
-  ```javascript
-  import React, { Component } from 'react';
-  import { change, reduxForm } from 'redux-form';
-  import { FormComponents } from 'redux-form-ext';
 
-  class MyForm extends Component {
-    render() {
-      var options = [
-        {
-          name: 'Option 1',
-          subtitle: 'Subtitle (Optional)',
-          value: 'option1',
-          className: 'custom-css-classes'
-        }
-      ];
+#### CheckboxGroup Example
+```javascript
+import React, { Component } from 'react';
+import { change, reduxForm } from 'redux-form';
+import { FormComponents } from 'redux-form-ext';
 
-      return (
-        <form onSubmit={handleSubmit}>
-          <FormComponents.CheckboxGroup className="my-custom-class" limit="4" name="myCheckboxName" updateField={(inputName, nextGroupValues) => {reduxChange(inputName, nextGroupValues)}} options={options} />
+class MyForm extends Component {
+  render() {
+    var options = [
+      {
+        name: 'Option 1',
+        subtitle: 'Subtitle (Optional)',
+        value: 'option1',
+        className: 'custom-css-classes'
+      }
+    ];
 
-          <button type="submit">Submit</button>
-        </form>
-      );
-    }
+    return (
+      <form onSubmit={handleSubmit}>
+        <FormComponents.CheckboxGroup className="my-custom-class" limit="4" name="myCheckboxName" updateField={(inputName, nextGroupValues) => {reduxChange(inputName, nextGroupValues)}} options={options} />
+
+        <button type="submit">Submit</button>
+      </form>
+    );
   }
+}
 
-  const mapStateToProps = (state) => {
-    return {
-      initialValues: state.myReducer.myCurrentValues
-    };
+const mapStateToProps = (state) => {
+  return {
+    initialValues: state.myReducer.myCurrentValues
   };
+};
 
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      reduxChange: (inputName, values) => { dispatch(change('myFormName', inputName, values))}
-    };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    reduxChange: (inputName, values) => { dispatch(change('myFormName', inputName, values))}
   };
+};
 
-  const Container = connect(mapStateToProps, mapDispatchToProps)(MyForm);
+const Container = connect(mapStateToProps, mapDispatchToProps)(MyForm);
 
-  export default reduxForm({
-    'form': 'myFormName'
-  });
-  ```
+export default reduxForm({
+  'form': 'myFormName'
+});
+```
 
 #### Phone
 - Phone text field with auto US phone normalization.
@@ -208,7 +209,8 @@ import { FormComponents } from 'redux-form-ext';
       - name (required)
         - The Display Name.
       - value (required)
-- Example
+
+#### SelectList Example 
 ```javascript
 <FormComponents.SelectList 
   name="accountType" 
