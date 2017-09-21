@@ -114,7 +114,15 @@ class MultiStepForm extends Component {
 
   render() {
     const { curStepIndex, numOfSteps } = this.state;
-    const { handleSubmit, saveError, saveLabel, steps } = this.props;
+    const { handleSubmit, isSaving, isSavingComponent, saveError, saveLabel, steps } = this.props;
+
+    if (isSaving) {
+      return (
+        <section className="multi-step-form">
+          {isSavingComponent}
+        </section>
+      );
+    }
 
     return (
       <section className="multi-step-form">
@@ -198,6 +206,8 @@ class MultiStepForm extends Component {
 MultiStepForm.propTypes = {
   handleSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool.isRequired,
+  isSavingComponent: PropTypes.node,
   saveError: PropTypes.string,
   saveLabel: PropTypes.string,
   steps: PropTypes.array.isRequired,
@@ -205,6 +215,7 @@ MultiStepForm.propTypes = {
 };
 
 MultiStepForm.defaultProps = {
+  isSavingComponent: (<div className="saving">Saving...</div>),
   saveLabel: 'Save',
 };
 

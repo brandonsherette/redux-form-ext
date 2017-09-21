@@ -3,6 +3,11 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.5.0**
+- Added isSaving property to Multi Step Form.
+- Added isSavingComponent property to Multi Step Form.
+- Fixed issue with Multi Step Form state being reset when async save fails, however the isSaving and isSavingComponent property must be utilized for it work properly.
+
 **v0.4.0**
 - Fixed issue with Multi Step Form breadcrumb state not updating correctly.
 
@@ -101,7 +106,7 @@ success and error styling on form elements, and various other built in features.
 import { FormComponents } from 'redux-form-ext';
 ```
 
-### Available Components
+### Available FormComponents
 
 #### CheckboxGroup
 - Needs intialValues the have an array with the name of the checkbox group to be able to do array type actions.
@@ -568,14 +573,6 @@ class RegisterStepForm extends Component {
       <StepAccount title="Account" />,
     ];
 
-    if (isSaving) {
-      return (
-        <section>
-          <h2>Saving...</h2>
-        </section>
-      );
-    }
-
     if (isSaveCompleted) {
       return (
         <section>
@@ -597,7 +594,19 @@ class RegisterStepForm extends Component {
         <header>
           <h1>Multi Step Registration</h1>
         </header>
-        <MultiStepForm handleSubmit={handleSubmit} handleSave={handleSave} saveError={saveError} steps={steps} errors={formSyncErrors} />
+        <MultiStepForm 
+          handleSubmit={handleSubmit} 
+          handleSave={handleSave}
+          isSaving={isSaving}
+          isSavingComponent={(
+            <section>
+              <h2>Saving...</h2>
+            </section>
+          )}
+          saveError={saveError} 
+          steps={steps} 
+          errors={formSyncErrors} 
+        />
       </section>
     );
   }
@@ -701,6 +710,21 @@ StepAccount.formInputs = ['firstname', 'lastname', 'phone'];
 
 export default StepAccount;
 ```
+
+## MultiStepForm Props
+- handleSubmit: Function (required)
+  - ReduxForm's handleSubmit method.
+- handleSave(formValues: Object): Function (required)
+  - the function to call when the form is valid and ready for the form values to be saved.
+- isSaving: Boolean (required)
+  - Whether or not the form data is currently being saved or not.
+- isSavingComponent: ReactNode (optional)
+  - The component to show when the form is being saved (when isSaved property is set to true).
+- saveError: String (optional)
+  - The error from the save task.
+- steps: ArrayOfMultiStepForm.Step (required)
+- errors: Object (optional)
+  - The sync errors from the form.
 
 ## CSS
 To include styling for the form elements in es6, you can require the stylesheet as shown below:

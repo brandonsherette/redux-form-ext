@@ -26,14 +26,6 @@ class RegisterStepForm extends Component {
       <StepConfirm title="Confirm" />,
     ];
 
-    if (isSaving) {
-      return (
-        <section>
-          <Loading title="Saving..." />
-        </section>
-      );
-    }
-
     if (isSaveCompleted) {
       return (
         <section>
@@ -55,7 +47,15 @@ class RegisterStepForm extends Component {
         <header>
           <h1>Multi Step Registration</h1>
         </header>
-        <MultiStepForm handleSubmit={handleSubmit} handleSave={handleSave} saveError={saveError} steps={steps} errors={syncErrors} />
+        <MultiStepForm 
+          handleSubmit={handleSubmit} 
+          handleSave={handleSave} 
+          isSaving={isSaving}
+          isSavingComponent={(<Loading title="Saving..." />)} 
+          saveError={saveError} 
+          steps={steps} 
+          errors={syncErrors} 
+        />
       </section>
     );
   }
@@ -75,7 +75,7 @@ const mapStateToProps = (state) => {
     isSaving: state.stepForm.isSaving,
     isSaveCompleted: state.stepForm.isSaveCompleted,
     saveError: state.stepForm.error,
-    syncErrors: state.form[FORM_NAME].syncErrors,
+    syncErrors: (state.form[FORM_NAME]) ? state.form[FORM_NAME].syncErrors : null,
   };
 };
 
