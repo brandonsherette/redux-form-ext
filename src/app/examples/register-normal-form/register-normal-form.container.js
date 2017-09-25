@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { change as reduxFormChange, reduxForm } from 'redux-form';
 import Loading from '../../vendor/loading/loading';
 import { FormComponents, Normalize } from '../../redux-form-ext/index';
+import asyncValidate from '../async-validate';
 import validate from '../validate';
 import { save, resetSaveState } from './actions';
 
@@ -129,6 +130,7 @@ class RegisterNormalForm extends Component {
               }
             ]}
           />
+          <FormComponents.Hidden name="validation" />
           <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
@@ -166,6 +168,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const Form = reduxForm({
   form: 'register-normal-form',
+  asyncValidate,
+  asyncBlurFields: ['accountType'],
   validate: validate
 })(RegisterNormalForm);
 

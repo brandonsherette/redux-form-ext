@@ -3,6 +3,9 @@
 ## Description
 Extension for redux form.
 ## Versions
+**v0.6.0**
+- Added New Form Component "Hidden".
+
 **v0.5.0**
 - Added isSaving property to Multi Step Form.
 - Added isSavingComponent property to Multi Step Form.
@@ -174,6 +177,13 @@ export default reduxForm({
   'form': 'myFormName'
 });
 ```
+
+#### Hidden
+- Hidden text field, useful for validating state outside of a form, but sync up with the form's validation.
+- Props
+  - name: String (required)
+  - showNotifications: Boolean (optional defaults to true)
+    - Whether or not to show error/warning notifications if the field is invalid.
 
 #### Phone
 - Phone text field with auto US phone normalization.
@@ -424,6 +434,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { FormComponents, Normalize } from 'redux-form-ext';
+import asyncValidate from './async-validate';
 import validate from './validate';
 import { save, resetSaveState } from './actions';
 
@@ -463,11 +474,51 @@ class RegisterNormalForm extends Component {
           <h1>Normal Form Registration</h1>
         </header>
         <form className="form" onSubmit={handleSubmit((values) => { handleSave(values) }) }>
-          <FormComponents.Text label="* Email" placeholder="Email" name="email" isLabelInline={false} />
-          <FormComponents.Text normalize={Normalize.name} label="* Firstname" placeholder="Firstname" name="firstname" isLabelInline={false} />
-          <FormComponents.Text normalize={Normalize.name} label="* Lastname" placeholder="Lastname" name="lastname" isLabelInline={false} />
-          <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
-          <FormComponents.Phone label="Phone" placeholder="Phone" name="phone" isLabelInline={false} />
+          <FormComponents.Text 
+            label="* Email" 
+            placeholder="Email" 
+            name="email" 
+            isLabelInline={false} 
+          />
+          <FormComponents.Text 
+            normalize={Normalize.name} 
+            label="* Firstname" 
+            placeholder="Firstname" name="firstname" 
+            isLabelInline={false} 
+          />
+          <FormComponents.Text 
+            normalize={Normalize.name} 
+            label="* Lastname" 
+            placeholder="Lastname" 
+            name="lastname" 
+            isLabelInline={false} 
+          />
+          <FormComponents.Text 
+            label="* Password" 
+            placeholder="Password" 
+            name="password" 
+            type="password" 
+            isLabelInline={false} 
+          />
+          <FormComponents.Phone 
+            label="Phone" 
+            placeholder="Phone" 
+            name="phone" 
+            isLabelInline={false} 
+          />
+          <FormComponents.SelectList 
+            name="accountType" 
+            options={actTypeOptions} 
+            label="Account Type" 
+            labelHint={(
+              <i 
+                role="button" 
+                className="fa fa-question-circle" 
+                onClick={() => { alert('Account type determines the permissions the account has.')} }>
+              </i>
+            )} 
+          />
+          <FormComponents.Hidden name="validate" showNotifications={true} />
           <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
@@ -502,13 +553,30 @@ const mapDispatchToProps = (dispatch) => {
 
 const Form = reduxForm({
   form: 'register-normal-form',
-  validate: validate
+  asyncValidate,
+  asyncBlurFields: ['accountType'],
+  validate,
 })(RegisterNormalForm);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Form);
+```
+
+### async-validate.js
+```javascript
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const asyncValidate = (values) => {
+  return sleep(500).then(() => {
+    if (values.accountType.toLowerCase() === 'admin') {
+      throw { validation: 'Account needs to be verified' }
+    }
+  });
+};
+
+export default asyncValidate;
 ```
 
 ### validate.js

@@ -1,4 +1,5 @@
 import CheckboxGroup from './checkbox-group';
+import Hidden from './hidden';
 import Phone from './phone';
 import RadioGroup from './radio-group';
 import SelectList from './select-list';
@@ -13,6 +14,7 @@ require('./styles/index.scss');
 
 const Components = {
   CheckboxGroup,
+  Hidden,
   Phone,
   RadioGroup,
   SelectList,
