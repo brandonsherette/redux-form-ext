@@ -8,7 +8,12 @@ const Step = ({children, title}) => (
 );
 
 Step.propTypes = {
+  stepError: PropTypes.any,
   title: PropTypes.string.isRequired
-} 
+}
+
+Step.defaultProps = {
+  stepError: null
+};
 
 export default Step;
