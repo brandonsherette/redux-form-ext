@@ -21,7 +21,7 @@ class ManualStepInvalid extends Component {
       isSaving, 
       isSaveCompleted, 
       saveError, 
-      syncErrors 
+      formSyncErrors 
     } = this.props;
 
     const accountStepError = (formValues.accountType.toLowerCase() === 'admin')
@@ -62,7 +62,7 @@ class ManualStepInvalid extends Component {
           isSavingComponent={(<Loading title="Saving..." />)}
           saveError={saveError}
           steps={steps}
-          errors={syncErrors}
+          errors={formSyncErrors}
         />
       </section>
     )
@@ -76,7 +76,7 @@ const mapStateToProps = (state) => {
     isSaving: state.manualStepInvalid.isSaving,
     isSaveCompleted: state.manualStepInvalid.isSaveCompleted,
     saveError: state.manualStepInvalid.error,
-    syncErrors: (state.form[FORM_NAME]) ? state.form[FORM_NAME].syncErrors : null,
+    formSyncErrors: (state.form[FORM_NAME]) ? state.form[FORM_NAME].syncErrors : null,
   };
 };
 
@@ -106,8 +106,6 @@ const ManualStepInvalidForm = reduxForm({
     if (!values.lastname) {
       errors.lastname = 'Required';
     }
-
-    console.debug('Errors', errors);
 
     return errors;
   }

@@ -18,11 +18,38 @@ class MultiStepForm extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.debug('Component Updated');
-    console.debug('Prev Props', prevProps);
-    console.debug('Curt Props', this.props);
+  shouldComponentUpdate(nextProps, nextState) {
+    const curProps = this.props;
+    const curState = this.state;
+    const hasErrorsChanged = (curProps.errors && nextProps.errors) ?
+      (JSON.stringify(curProps.errors) !== JSON.stringify(nextProps.errors)) :
+      (curProps.errors !== nextProps.errors);
+
+    let hasStepErrorsChanged = false;
+
+    if (curProps.steps.length === nextProps.steps.length) {
+      for (let x = 0; x < curProps.steps.length; x += 1) {
+        if (curProps.steps[x].props.stepError !== nextProps.steps[x].props.stepError) {
+          hasStepErrorsChanged = true;
+        }
+      }
+    } else {
+      // the steps length has been changed so needs to be updated
+      hasStepErrorsChanged = true;
+    }
+
+    return (
+      curProps.saveLabel            !== nextProps.saveLabel ||
+      curProps.saveError            !== nextProps.saveError ||
+      curProps.isSaving             !== nextProps.isSaving ||
+      curProps.errors               !== nextProps.errors ||
+      curState.curStepIndex         !== nextState.curStepIndex ||
+      curState.stepsTouched.length  !== nextState.stepsTouched.length ||
+      curProps.steps.length         !== nextProps.steps.length ||
+      hasErrorsChanged || hasStepErrorsChanged
+    );
   }
+  
 
   evalSubmit(values) {
     const { curStepIndex, numOfSteps } = this.state;
