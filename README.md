@@ -4,7 +4,7 @@
 Extension for redux form.
 ## Versions
 **upcoming version**
-- Added stepError property to MultiFormStep to allow for manual step invalid functionality for when a step needs to have addtional steps taken outside of form inputs for that particual step to be valid.
+- Added stepError property to MultiStepForm to allow for manual step invalid functionality for when a step needs to have addtional steps taken outside of form inputs for that particular step to be valid.
 
 
 **v0.6.0**
