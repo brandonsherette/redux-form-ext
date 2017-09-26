@@ -18,13 +18,46 @@ class MultiStepForm extends Component {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const curProps = this.props;
+    const curState = this.state;
+    const hasErrorsChanged = (curProps.errors && nextProps.errors) ?
+      (JSON.stringify(curProps.errors) !== JSON.stringify(nextProps.errors)) :
+      (curProps.errors !== nextProps.errors);
+
+    let hasStepErrorsChanged = false;
+
+    if (curProps.steps.length === nextProps.steps.length) {
+      for (let x = 0; x < curProps.steps.length; x += 1) {
+        if (curProps.steps[x].props.stepError !== nextProps.steps[x].props.stepError) {
+          hasStepErrorsChanged = true;
+        }
+      }
+    } else {
+      // the steps length has been changed so needs to be updated
+      hasStepErrorsChanged = true;
+    }
+
+    return (
+      curProps.saveLabel            !== nextProps.saveLabel ||
+      curProps.saveError            !== nextProps.saveError ||
+      curProps.isSaving             !== nextProps.isSaving ||
+      curProps.errors               !== nextProps.errors ||
+      curState.curStepIndex         !== nextState.curStepIndex ||
+      curState.stepsTouched.length  !== nextState.stepsTouched.length ||
+      curProps.steps.length         !== nextProps.steps.length ||
+      hasErrorsChanged || hasStepErrorsChanged
+    );
+  }
+  
+
   evalSubmit(values) {
     const { curStepIndex, numOfSteps } = this.state;
 
     // check if final step 
     if (curStepIndex + 1 === numOfSteps) {
       // only trigger save if no errors are found throughout the entire app
-      if (!this.props.errors) {
+      if (this.isFormValid()) {
         this.props.handleSave(values);
       }
     } else {
@@ -35,12 +68,10 @@ class MultiStepForm extends Component {
   evalStep(stepIndex, StepComponent, errors) {
     const { curStepIndex, stepsTouched } = this.state;
     const isTouched = stepsTouched[stepIndex];
-    const isInvalid = this.isStepInvalid(StepComponent.type.formInputs, errors);
+    const isInvalid = this.isStepInvalid(StepComponent, errors);
     const isActive = (stepIndex <= curStepIndex || isTouched);
     const isDisabled = this.isStepNavDisabled(stepIndex, isActive);
     
-    // make sure to update current step for being touched
-    // subtract 1 from stup number to get the index
     return {
       isActive,
       isValid: !isInvalid,
@@ -67,9 +98,32 @@ class MultiStepForm extends Component {
     }
   }
 
-  isStepInvalid(formInputs, errors) {
-    if (!formInputs) {
+  isFormValid() {
+    const { errors, steps } = this.props;
+
+    // if there anything in errors or if any one of the 
+    // step components has a stepInvalid prop set to true, the entire form is invalid
+    if (errors) {
       return false;
+    }
+
+    // loop through each step and see if isStepInvalid prop is attached
+    const stepInvalid = steps.find((StepComponent) => StepComponent.props.stepError);
+
+    return (stepInvalid) ? false : true;
+  }
+
+  isStepInvalid(StepComponent, errors) {
+    const stepError = StepComponent.props.stepError;
+    const formInputs = StepComponent.type.formInputs;
+
+    if (!formInputs && !stepError) {
+      return false;
+    }
+
+    // manual override of if the step is in an error state
+    if (stepError) {
+      return true;
     }
 
     if (!Array.isArray(formInputs)) {
@@ -93,7 +147,7 @@ class MultiStepForm extends Component {
 
   isStepNavDisabled(stepIndex, isStepActive) {
     const { curStepIndex } = this.state;
-
+    
     // is disabled when one of the following occurs
     // 1. Isn't active or is current step.
     // 2. If a previous step isInvalid.
@@ -103,7 +157,7 @@ class MultiStepForm extends Component {
 
     // need to loop through each previous steps to see if form is invalid
     for (let x = 0; x < stepIndex; x += 1) {
-      if (this.isStepInvalid(this.props.steps[x].type.formInputs, this.props.errors)) {
+      if (this.isStepInvalid(this.props.steps[x], this.props.errors)) {
         return true;
       }
     }
@@ -114,7 +168,10 @@ class MultiStepForm extends Component {
 
   render() {
     const { curStepIndex, numOfSteps } = this.state;
-    const { handleSubmit, isSaving, isSavingComponent, saveError, saveLabel, steps } = this.props;
+    const { errors, handleSubmit, isSaving, isSavingComponent, saveError, saveLabel, steps } = this.props;
+    const CurStepComponent = steps[curStepIndex];
+    const curStepError = CurStepComponent.props.stepError;
+    const isCurStepInvalid = this.isStepInvalid(CurStepComponent, errors);
 
     if (isSaving) {
       return (
@@ -134,43 +191,25 @@ class MultiStepForm extends Component {
           </ol>
         </div>
         <form onSubmit={handleSubmit((values) => { this.evalSubmit(values) }) }>
-          {saveError && (<div className="alert alert-danger" role="alert"><strong>Error!</strong> {saveError}</div>)}
+          {saveError && (<div className="alert alert-danger" role="alert">{saveError}</div>)}
+          {curStepError && (<div className="step-error">{curStepError}</div>)}
           <div className="form-step-wrapper">
-            {steps.map((step, index) => {
-              return this.renderStep(step, index);
-            })}
+            <div className="multi-step-form__step-wrapper">
+              {CurStepComponent}
+            </div>
           </div>
           <div className="form-footer">
             <div className="pull-left">
               <button type="button" disabled={curStepIndex === 0} onClick={this.gotoStep.bind(this, curStepIndex - 1) } className="btn btn-primary btn-back"><i className="fa fa-chevron-circle-left"></i>&nbsp;Back</button>
             </div>
             <div className="pull-right">
-              {curStepIndex !== numOfSteps - 1 && (<button type="submit" className="btn btn-primary btn-next">Next&nbsp;<i className="fa fa-chevron-circle-right"></i></button>) }
-              {curStepIndex === numOfSteps - 1 && (<button type="submit" className="btn btn-success btn-next"><i className="fa fa-floppy-o"></i>&nbsp;{saveLabel}</button>) }
+              {curStepIndex !== numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-primary btn-next">Next&nbsp;<i className="fa fa-chevron-circle-right"></i></button>) }
+              {curStepIndex === numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-success btn-next"><i className="fa fa-floppy-o"></i>&nbsp;{saveLabel}</button>) }
             </div>
           </div>
         </form>
       </section>
     );
-  }
-
-  renderStep(StepComponent, stepIndex) {
-    // StepComponent needs title to create proper key
-    if (!StepComponent.props.title) {
-      throw 'Step Component (' + StepComponent.type.name + ') requires title property.';
-    }
-
-    const { curStepIndex } = this.state;
-
-    if (stepIndex === curStepIndex && StepComponent) {
-      return (
-        <div className="multi-step-form__step-wrapper" key={Util.convertToSlug(StepComponent.props.title)}>
-          {StepComponent}
-        </div>
-      );
-    }
-
-    return null;
   }
 
   renderStepBreadcrumb(StepComponent, stepIndex) {

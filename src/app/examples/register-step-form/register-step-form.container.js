@@ -17,7 +17,16 @@ const FORM_NAME = 'register-step-form';
 
 class RegisterStepForm extends Component {
   render() {
-    const {handleSubmit, handleSave, handleResetSaveState, handleUpdateField, isSaving, isSaveCompleted, saveError, syncErrors } = this.props;
+    const {
+      handleSubmit, 
+      handleSave, 
+      handleResetSaveState, 
+      handleUpdateField, 
+      isSaving, 
+      isSaveCompleted, 
+      saveError, 
+      formSyncErrors 
+    } = this.props;
     const steps = [
       <StepLogin title="Login" />,
       <StepAccount title="Account" />,
@@ -54,7 +63,7 @@ class RegisterStepForm extends Component {
           isSavingComponent={(<Loading title="Saving..." />)} 
           saveError={saveError} 
           steps={steps} 
-          errors={syncErrors} 
+          errors={formSyncErrors} 
         />
       </section>
     );
@@ -75,7 +84,7 @@ const mapStateToProps = (state) => {
     isSaving: state.stepForm.isSaving,
     isSaveCompleted: state.stepForm.isSaveCompleted,
     saveError: state.stepForm.error,
-    syncErrors: (state.form[FORM_NAME]) ? state.form[FORM_NAME].syncErrors : null,
+    formSyncErrors: (state.form[FORM_NAME]) ? state.form[FORM_NAME].syncErrors : null,
   };
 };
 
