@@ -1,6 +1,10 @@
-# Redux Form Extension (Currently In Development)
-Extension for redux form.
+# Redux Form Extension
+Extension for redux form. Prebuilt styled form components, validation, input normalization, multi step form (form wizard), and more.
 # Versions
+## v0.8.0
+### Features
+- Added Checkbox FormComponent.
+
 ## v0.7.2
 ### Updates
 - Updated FormComponents "label" property to no longer just be a string value, but can be a React Node for better customization.
@@ -73,7 +77,7 @@ npm install --save https://github.com/brandonsherette/redux-form-ext.git
 import { FormComponents, Normalize, Validator } from 'redux-form-ext';
 ```
 
-## Normalize Methods
+# Normalize Methods
 - name(str : String) : String
   - Difference between title and name is title, lowercase everything but first letter in word.
   - Example
@@ -97,7 +101,7 @@ import { FormComponents, Normalize, Validator } from 'redux-form-ext';
     var title = Normalize.title('mC dOnalds'); // result 'Mc Donalds';
     ```
 
-## Validator Methods
+# Validator Methods
 - isValidEmail(email : String) : Boolean
 - isValidPhone(phone : String) : Boolean
 - isValidMiddleInitial(str : String) : Boolean
@@ -112,18 +116,23 @@ import { FormComponents, Normalize, Validator } from 'redux-form-ext';
 - isValidZip(str : String) : Boolean
   - Value must be inbetween 4 - 10 numbers long (only numbers allowed).
 
-## FormComponents
+# FormComponents
 Form Components are react components that work along with redux form, and streamline several features such as 
 success and error styling on form elements, and various other built in features.
 
-### Import FormComponents
+## Import FormComponents
 ```javascript
 import { FormComponents } from 'redux-form-ext';
 ```
 
-### Available FormComponents
-
-#### CheckboxGroup
+## Available FormComponents
+### Checkbox
+- Props
+  - autoFocus: Boolean (optional)
+  - label: String|Node (required)
+  - name: String (required)
+  
+### CheckboxGroup
 - Needs intialValues the have an array with the name of the checkbox group to be able to do array type actions.
 - updateField passes in fieldName and values
 - Props
@@ -190,14 +199,14 @@ export default reduxForm({
 });
 ```
 
-#### Hidden
+### Hidden
 - Hidden text field, useful for validating state outside of a form, but sync up with the form's validation.
 - Props
   - name: String (required)
   - showNotifications: Boolean (optional defaults to true)
     - Whether or not to show error/warning notifications if the field is invalid.
 
-#### Phone
+### Phone
 - Phone text field with auto US phone normalization.
 - Props
   - autoFocus: Boolean (optional)
@@ -207,7 +216,7 @@ export default reduxForm({
   - placeholder: String (optional)
   - isLabelInline: Boolean (optional defaults to true)
 
-#### RadioGroup
+### RadioGroup
 - Props
   - className: String (optional)
   - groupName: String (required)

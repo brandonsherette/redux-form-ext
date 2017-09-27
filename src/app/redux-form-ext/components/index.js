@@ -1,3 +1,4 @@
+import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
 import Hidden from './hidden';
 import Phone from './phone';
@@ -13,6 +14,7 @@ import USStateList from './us-state-list';
 require('./styles/index.scss');
 
 const Components = {
+  Checkbox,
   CheckboxGroup,
   Hidden,
   Phone,

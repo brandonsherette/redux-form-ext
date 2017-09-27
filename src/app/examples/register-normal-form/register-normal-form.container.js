@@ -131,6 +131,7 @@ class RegisterNormalForm extends Component {
             ]}
           />
           <FormComponents.Hidden name="validation" />
+          <FormComponents.Checkbox label="Subscribe to newsletter." name="subscribeToNewsletter" />
           <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
@@ -149,7 +150,9 @@ RegisterNormalForm.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    initialValues: Object.assign({}, state.user.defaultModel),
+    initialValues: Object.assign({}, state.user.defaultModel, {
+      subscribeToNewsletter: false,
+    }),
     isSaving: state.normalForm.isSaving,
     isSaveCompleted: state.normalForm.isSaveCompleted,
     saveError: state.normalForm.error
