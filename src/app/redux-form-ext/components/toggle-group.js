@@ -49,7 +49,7 @@ class ToggleGroup extends Component {
 ToggleGroup.propTypes = {
   className: PropTypes.string,
   groupName: PropTypes.string.isRequired,
-  label: PropTypes.string,
+  label: PropTypes.any,
   labelHint: PropTypes.node,
   options: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,

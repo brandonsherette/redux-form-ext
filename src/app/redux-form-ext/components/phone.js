@@ -89,7 +89,7 @@ const Phone = (props) => (
 
 Phone.propTypes = {
   autoFocus: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.any,
   labelDisclaimer: PropTypes.any,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
@@ -100,6 +100,7 @@ Phone.propTypes = {
 
 Phone.defaultProps = {
   autoFocus: false,
+  label: '',
   labelDisclaimer: '',
   placeholder: '',
   isLabelInline: true,

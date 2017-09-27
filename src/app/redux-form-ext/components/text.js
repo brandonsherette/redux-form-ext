@@ -52,7 +52,7 @@ class renderField extends Component {
     if (isLabelInline) {
       return (
         <div className="form-group form-group-text row no-side-margin">
-          <label className="col-md-3 block label-box" htmlFor={label}>
+          <label className="col-md-3 block label-box" htmlFor={input.name}>
             <span>{label}&nbsp; </span>
             <span className="disclaimer">{labelDisclaimer}</span>
           </label>
@@ -89,7 +89,7 @@ const Text = (props) => (
 
 Text.propTypes = {
   autoFocus: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.any,
   labelDisclaimer: PropTypes.any,
   maxLength: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -102,6 +102,7 @@ Text.propTypes = {
 
 Text.defaultProps = {
   autoFocus: false,
+  label: '',
   labelDisclaimer: '',
   maxLength: null,
   placeholder: '',

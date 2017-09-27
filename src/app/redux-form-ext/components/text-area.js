@@ -89,7 +89,7 @@ const TextArea = (props) => (
 
 TextArea.propTypes = {
   autoFocus: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.any,
   labelDisclaimer: PropTypes.any,
   maxLength: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -102,6 +102,7 @@ TextArea.propTypes = {
 
 TextArea.defaultProps = {
   autoFocus: false,
+  label: '',
   labelDisclaimer: '',
   maxLength: null,
   placeholder: '',

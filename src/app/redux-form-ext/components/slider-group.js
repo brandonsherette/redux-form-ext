@@ -92,7 +92,7 @@ SliderGroupField.propTypes = {
   groupName: PropTypes.string.isRequired,
   max: PropTypes.number.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.any.isRequired,
     fieldName: PropTypes.string.isRequired
   })).isRequired,
   triggerFieldChange: PropTypes.func.isRequired

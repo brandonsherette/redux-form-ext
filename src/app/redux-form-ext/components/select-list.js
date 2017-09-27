@@ -27,7 +27,7 @@ class SelectList extends Component {
 
     return (
       <div className="select-list form-group form-group-select-list row mx-0">
-        <label className={labelStyles} htmlFor={label}>
+        <label className={labelStyles} htmlFor={input.name}>
           <span>{label}</span>
           <span className="disclaimer label-hint">{labelHint}</span>
         </label>
@@ -50,7 +50,7 @@ const FieldSelectList = (props) => (
 
 FieldSelectList.propTypes = {
   autoFocus: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.any,
   labelHint: PropTypes.node,
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,

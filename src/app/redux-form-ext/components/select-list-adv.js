@@ -35,7 +35,7 @@ class SelectList extends Component {
     if (isLabelInline) {
       return (
         <div className="select-list form-group form-group-select-list row mx-0 label-inline">
-          <label className="col-md-3 col-sm-3 col-xs-12 block label-box" htmlFor={label}>
+          <label className="col-md-3 col-sm-3 col-xs-12 block label-box" htmlFor={input.name}>
             <span>{label}</span>
             <span className="disclaimer">{labelDisclaimer}</span>
           </label>
@@ -68,7 +68,7 @@ const FieldSelectList = (props) => (
 
 FieldSelectList.propTypes = {
   autoFocus: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.any,
   labelDisclaimer: PropTypes.string,
   isLabelInline: PropTypes.bool,
   name: PropTypes.string.isRequired,

@@ -1,6 +1,10 @@
 # Redux Form Extension (Currently In Development)
 Extension for redux form.
 # Versions
+## v0.7.2
+### Updates
+- Updated FormComponents "label" property to no longer just be a string value, but can be a React Node for better customization.
+
 ## v0.7.1
 ### Bugs/Fixes
 - Updated MultiStepForm shouldComponentUpdate to now check the specified step component's stepError and formValues property for any changes.
@@ -197,7 +201,7 @@ export default reduxForm({
 - Phone text field with auto US phone normalization.
 - Props
   - autoFocus: Boolean (optional)
-  - label: String (required)
+  - label: String|Node (optional)
   - labelDisclaimer: String (optional)
   - name: String (required)
   - placeholder: String (optional)
@@ -220,7 +224,7 @@ export default reduxForm({
 #### SelectList
 - Props
   - autoFocus: Boolean (optional defaults to false)
-  - label: String (optional)
+  - label: String|Node (optional)
   - labelHint: Node (optional)
     - Used to add font awesome icons and click actions to open up tooltips or modals with additional information.
   - name: String (required)
@@ -260,7 +264,7 @@ export default reduxForm({
 #### SelectListAdv
 - Props
   - autoFocus: Boolean (optional)
-  - label: String (optional)
+  - label: String|Node (optional)
   - labelDisclaimer: String (optional)
   - isLabelInline: Boolean (optional defaults to true)
   - name: String (required)
@@ -358,7 +362,7 @@ export default reduxForm({
 #### TextArea
 - Props
   - autoFocus: Boolean (optional defaults to false)
-  - label: String (required)
+  - label: String|Node (optional)
   - labelDisclaimer: String (optional)
   - maxLength: Int (optional)
   - name: String (required)
@@ -370,7 +374,7 @@ export default reduxForm({
 #### Text
 - Props
   - autoFocus: Boolean (optional defaults to false)
-  - label: String (required)
+  - label: String|Node (optional)
   - labelDisclaimer: String (optional)
   - maxLength: Int (optional)
   - name: String (required)
@@ -384,7 +388,7 @@ export default reduxForm({
 - Props
   - className: String (optional)
   - groupName: String (required)
-  - label: String (optional)
+  - label: String|Node (optional)
   - labelHint: Node (optional)
   - options: ArrayOfObjects (required)
     - name (required)
