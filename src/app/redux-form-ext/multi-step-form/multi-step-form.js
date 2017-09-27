@@ -25,31 +25,37 @@ class MultiStepForm extends Component {
       (JSON.stringify(curProps.errors) !== JSON.stringify(nextProps.errors)) :
       (curProps.errors !== nextProps.errors);
 
-    let hasStepErrorsChanged = false;
+    let hasStepsChanged = false;
 
     if (curProps.steps.length === nextProps.steps.length) {
       for (let x = 0; x < curProps.steps.length; x += 1) {
-        if (curProps.steps[x].props.stepError !== nextProps.steps[x].props.stepError) {
-          hasStepErrorsChanged = true;
+        const curStepProps = curProps.steps[x].props;
+        const nextStepProps = nextProps.steps[x].props;
+
+        if (
+          curStepProps.stepError !== nextStepProps.stepError ||
+          JSON.stringify(curStepProps.formValues) !== JSON.stringify(nextStepProps.formValues)
+        ) {
+          hasStepsChanged = true;
         }
       }
     } else {
       // the steps length has been changed so needs to be updated
-      hasStepErrorsChanged = true;
+      hasStepsChanged = true;
     }
 
     return (
-      curProps.saveLabel            !== nextProps.saveLabel ||
-      curProps.saveError            !== nextProps.saveError ||
-      curProps.isSaving             !== nextProps.isSaving ||
-      curProps.errors               !== nextProps.errors ||
-      curState.curStepIndex         !== nextState.curStepIndex ||
-      curState.stepsTouched.length  !== nextState.stepsTouched.length ||
-      curProps.steps.length         !== nextProps.steps.length ||
-      hasErrorsChanged || hasStepErrorsChanged
+      curProps.saveLabel !== nextProps.saveLabel ||
+      curProps.saveError !== nextProps.saveError ||
+      curProps.isSaving !== nextProps.isSaving ||
+      curProps.errors !== nextProps.errors ||
+      curState.curStepIndex !== nextState.curStepIndex ||
+      curState.stepsTouched.length !== nextState.stepsTouched.length ||
+      curProps.steps.length !== nextProps.steps.length ||
+      hasErrorsChanged || hasStepsChanged
     );
   }
-  
+
 
   evalSubmit(values) {
     const { curStepIndex, numOfSteps } = this.state;
@@ -71,7 +77,7 @@ class MultiStepForm extends Component {
     const isInvalid = this.isStepInvalid(StepComponent, errors);
     const isActive = (stepIndex <= curStepIndex || isTouched);
     const isDisabled = this.isStepNavDisabled(stepIndex, isActive);
-    
+
     return {
       isActive,
       isValid: !isInvalid,
@@ -147,7 +153,7 @@ class MultiStepForm extends Component {
 
   isStepNavDisabled(stepIndex, isStepActive) {
     const { curStepIndex } = this.state;
-    
+
     // is disabled when one of the following occurs
     // 1. Isn't active or is current step.
     // 2. If a previous step isInvalid.
@@ -190,7 +196,7 @@ class MultiStepForm extends Component {
             })}
           </ol>
         </div>
-        <form onSubmit={handleSubmit((values) => { this.evalSubmit(values) }) }>
+        <form onSubmit={handleSubmit((values) => { this.evalSubmit(values) })}>
           {saveError && (<div className="alert alert-danger" role="alert">{saveError}</div>)}
           {curStepError && (<div className="step-error">{curStepError}</div>)}
           <div className="form-step-wrapper">
@@ -200,11 +206,11 @@ class MultiStepForm extends Component {
           </div>
           <div className="form-footer">
             <div className="pull-left">
-              <button type="button" disabled={curStepIndex === 0} onClick={this.gotoStep.bind(this, curStepIndex - 1) } className="btn btn-primary btn-back"><i className="fa fa-chevron-circle-left"></i>&nbsp;Back</button>
+              <button type="button" disabled={curStepIndex === 0} onClick={this.gotoStep.bind(this, curStepIndex - 1)} className="btn btn-primary btn-back"><i className="fa fa-chevron-circle-left"></i>&nbsp;Back</button>
             </div>
             <div className="pull-right">
-              {curStepIndex !== numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-primary btn-next">Next&nbsp;<i className="fa fa-chevron-circle-right"></i></button>) }
-              {curStepIndex === numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-success btn-next"><i className="fa fa-floppy-o"></i>&nbsp;{saveLabel}</button>) }
+              {curStepIndex !== numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-primary btn-next">Next&nbsp;<i className="fa fa-chevron-circle-right"></i></button>)}
+              {curStepIndex === numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-success btn-next"><i className="fa fa-floppy-o"></i>&nbsp;{saveLabel}</button>)}
             </div>
           </div>
         </form>
@@ -217,7 +223,7 @@ class MultiStepForm extends Component {
     if (!StepComponent.props.title) {
       throw 'Step Component (' + StepComponent.type.name + ') requires title property.';
     }
-    
+
     const { errors } = this.props;
     const stepProgress = this.evalStep(stepIndex, StepComponent, errors);
 
@@ -237,7 +243,7 @@ class MultiStepForm extends Component {
     );
 
     return (
-      <li key={Util.convertToSlug(stepTitle)} className={stepStyles} disabled={isStepDisabled} role={!isStepDisabled ? 'button' : ''} onClick={this.handleCrumbClick.bind(this, stepIndex, isStepDisabled) }>{stepTitle}</li>
+      <li key={Util.convertToSlug(stepTitle)} className={stepStyles} disabled={isStepDisabled} role={!isStepDisabled ? 'button' : ''} onClick={this.handleCrumbClick.bind(this, stepIndex, isStepDisabled)}>{stepTitle}</li>
     )
   }
 }

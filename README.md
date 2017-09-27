@@ -1,11 +1,13 @@
 # Redux Form Extension (Currently In Development)
 Extension for redux form.
 # Versions
-## v0.7.0
+## v0.7.1
+### Bugs/Fixes
+- Updated MultiStepForm shouldComponentUpdate to now check the specified step component's stepError and formValues property for any changes.
 
+## v0.7.0
 ### Features
 - Added stepError property to MultiStepForm to allow for manual step invalid functionality for when a step needs to have addtional steps taken outside of form inputs for that particular step to be valid.
-
 ### Bugs/Fixes
 - Updated MultiStepForm shouldComponentUpdate to help reduce the amount of times the component re-renders.
 
