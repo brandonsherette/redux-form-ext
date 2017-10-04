@@ -58,13 +58,13 @@ const states = [
 ];
 
 const options = [{
-  label: 'Select State',
+  name: 'Select State',
   value: ''
 }];
 
 states.forEach((state) => {
   options.push({
-    label: state,
+    name: state,
     value: state.substring(0,2) // state code
   });
 });

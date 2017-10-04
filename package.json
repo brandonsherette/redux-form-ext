@@ -1,6 +1,6 @@
 {
   "name": "redux-form-ext",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Redux Form Extension",
   "main": "dist/redux-form-ext.js",
   "scripts": {
@@ -19,7 +19,9 @@
     "rc-slider": "^8.0.2",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
+    "react-async-script": "^0.9.1",
     "react-dom": "^15.4.2",
+    "react-google-recaptcha": "^0.9.7",
     "react-redux": "^5.0.5",
     "react-select": "^1.0.0-rc.5",
     "redux": "^3.6.0",
@@ -32,6 +34,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.3.13",
+    "babel-runtime": "^6.26.0",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.10.0",

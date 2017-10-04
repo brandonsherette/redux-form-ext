@@ -1,6 +1,13 @@
 # Redux Form Extension
 Extension for redux form. Prebuilt styled form components, validation, input normalization, multi step form (form wizard), and more.
 # Versions
+## v0.9.0
+### Features
+- Added Captcha Field (requires react-google-recaptcha v0.9.7).
+
+### Bugs/Fixes
+- Fixed issue in USStateList where text wasn't showing in options.
+
 ## v0.8.0
 ### Features
 - Added Checkbox FormComponent.
@@ -68,7 +75,20 @@ Extension for redux form. Prebuilt styled form components, validation, input nor
 ## v0.0.1-alpha1
 - Base code implemented.
 
-## How to Install
+# Dependencies
+- classnames
+- prop-types
+- rc-slider
+- react
+- react-async-script
+- react-dom
+- react-google-recaptcha
+- react-redux
+- react-select
+- redux
+- redux-form
+
+# How to Install
 ```js 
 npm install --save https://github.com/brandonsherette/redux-form-ext.git
 ```
@@ -126,6 +146,12 @@ import { FormComponents } from 'redux-form-ext';
 ```
 
 ## Available FormComponents
+### Captcha
+- Props
+  - name: String (required)
+  - sitekey: String
+    - The sitekey to your google re-captcha.
+
 ### Checkbox
 - Props
   - autoFocus: Boolean (optional)

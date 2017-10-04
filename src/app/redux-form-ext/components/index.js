@@ -1,3 +1,4 @@
+import Captcha from './captcha';
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
 import Hidden from './hidden';
@@ -14,6 +15,7 @@ import USStateList from './us-state-list';
 require('./styles/index.scss');
 
 const Components = {
+  Captcha,
   Checkbox,
   CheckboxGroup,
   Hidden,

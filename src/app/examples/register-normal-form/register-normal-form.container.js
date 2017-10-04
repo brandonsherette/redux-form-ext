@@ -98,6 +98,7 @@ class RegisterNormalForm extends Component {
             ]}
             reduxFormChange={reduxFormChange}
           />
+          <FormComponents.Captcha name="captcha" sitekey={''} />
           <FormComponents.TextArea label="Account Notes" placeholder="Account Notes" name="accountNotes" isLabelInline={false} />
           <FormComponents.ToggleGroup
             fieldsToResetOnChange={[
@@ -132,6 +133,7 @@ class RegisterNormalForm extends Component {
           />
           <FormComponents.Hidden name="validation" />
           <FormComponents.Checkbox label="Subscribe to newsletter." name="subscribeToNewsletter" />
+          <FormComponents.USStateList reduxFormChange={reduxFormChange} />
           <p className="disclaimer">* Is Required</p>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>

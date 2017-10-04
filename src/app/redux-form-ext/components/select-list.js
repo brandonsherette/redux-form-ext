@@ -5,21 +5,21 @@ import { Field } from 'redux-form';
 
 class SelectList extends Component {
   render() {
-    const { autoFocus, label, labelHint, input, options, meta: { dirty, touched, error, warning, valid } } = this.props;
+    const { autoFocus, label, labelHint, input, isLabelInline, options, meta: { dirty, touched, error, warning, valid } } = this.props;
     const labelStyles = classNames(
-      'col-md-3',
       'block',
-      'label-box',
       {
-        'valid': (valid),
-        'invalid': (!valid && (dirty || touched))
+        'label-box': isLabelInline,
+        'col-md-3 col-sm-3 col-xs-12': isLabelInline,
+        'valid': (valid && isLabelInline),
+        'invalid': (!valid && (dirty || touched) && isLabelInline)
       }
     );
     const inputWrapperStyles = classNames(
       'input-wrapper',
-      'col-md-9',
       'px-0',
       {
+        'col-md-9 col-sm-9 col-xs-12': isLabelInline,
         'valid': (valid),
         'invalid': (!valid && (dirty || touched))
       }
@@ -52,6 +52,7 @@ FieldSelectList.propTypes = {
   autoFocus: PropTypes.bool,
   label: PropTypes.any,
   labelHint: PropTypes.node,
+  isLabelInline: PropTypes.bool,
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   validate: PropTypes.array
@@ -60,6 +61,7 @@ FieldSelectList.propTypes = {
 FieldSelectList.defaultProps = {
   autoFocus: false,
   label: '',
+  isLabelInline: true,
   validate: []
 };
 
