@@ -64,9 +64,14 @@ class RegisterStepForm extends Component {
           saveError={saveError} 
           steps={steps} 
           errors={formSyncErrors} 
+          onStepDidChange={this._onStepDidChange}
         />
       </section>
     );
+  }
+
+  _onStepDidChange(prevStepTitle, nextStepTitle) {
+    console.debug('Step Changed', prevStepTitle, nextStepTitle);
   }
 }
 

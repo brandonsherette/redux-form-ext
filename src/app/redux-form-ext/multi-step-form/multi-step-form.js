@@ -89,13 +89,21 @@ class MultiStepForm extends Component {
 
   gotoStep(stepIndex) {
     const stepsTouched = [...this.state.stepsTouched];
-    stepsTouched[this.state.curStepIndex] = this.state.curStepIndex;
+    const prevStepIndex = this.state.curStepIndex;
+    stepsTouched[prevStepIndex] = prevStepIndex;
     stepsTouched[stepIndex] = stepIndex;
 
     this.setState({
       curStepIndex: stepIndex,
       stepsTouched,
     });
+
+    if (this.props.onStepDidChange) {
+      const prevStepTitle = this.props.steps[prevStepIndex].props.title;
+      const nextStepTitle = this.props.steps[stepIndex].props.title;
+
+      this.props.onStepDidChange(prevStepTitle, nextStepTitle);
+    }
   }
 
   handleCrumbClick(stepIndex, isDisabled) {
@@ -253,6 +261,7 @@ MultiStepForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   isSavingComponent: PropTypes.node,
+  onStepDidChange: PropTypes.func,
   saveError: PropTypes.string,
   saveLabel: PropTypes.string,
   steps: PropTypes.array.isRequired,

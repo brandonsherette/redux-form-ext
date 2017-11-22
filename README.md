@@ -1,6 +1,10 @@
 # Redux Form Extension
 Extension for redux form. Prebuilt styled form components, validation, input normalization, multi step form (form wizard), and more.
 # Versions
+## v0.10.0
+### Features
+- Added optional onStepDidChange prop to MultiStepForm.
+
 ## v0.9.0
 ### Features
 - Added Captcha Field (requires react-google-recaptcha v0.9.7).
@@ -835,6 +839,9 @@ export default StepAccount;
   - Whether or not the form data is currently being saved or not.
 - isSavingComponent: ReactNode (optional)
   - The component to show when the form is being saved (when isSaved property is set to true).
+- onStepDidChange: function (optional)
+  - The event that a step has changed.
+  - onStepDidChange(prevStepTitle, nextStepTitle)
 - saveError: String (optional)
   - The error from the save task.
 - stepError: Node|String (optional)

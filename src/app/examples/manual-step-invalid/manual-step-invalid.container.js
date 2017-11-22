@@ -63,9 +63,14 @@ class ManualStepInvalid extends Component {
           saveError={saveError}
           steps={steps}
           errors={formSyncErrors}
+          onStepDidChange={this._onStepDidChange}
         />
       </section>
     )
+  }
+
+  _onStepDidChange(prevStep, nextStep) {
+    console.debug('Prev Step', '"' + prevStep + '"', 'Next Step', '"' + nextStep + '"');
   }
 }
 
