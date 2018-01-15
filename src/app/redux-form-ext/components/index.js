@@ -1,3 +1,4 @@
+import AddressGroup from './address-group';
 import Captcha from './captcha';
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
@@ -15,6 +16,7 @@ import USStateList from './us-state-list';
 require('./styles/index.scss');
 
 const Components = {
+  AddressGroup,
   Captcha,
   Checkbox,
   CheckboxGroup,

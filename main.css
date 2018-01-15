@@ -22,6 +22,20 @@
 section {
   margin-bottom: 25px;
 }
-.w-50 {
-  width: 50%;
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 320px) {
+  .w-50 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 720px) {
+  .w-50 {
+    width: 50%;
+  }
 }

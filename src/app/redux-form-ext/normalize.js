@@ -1,5 +1,18 @@
 const Normalize = {
   /**
+   * Normalizes making the first char lower case.
+   * 
+   * @method firstCharLower
+   * @param {String} str the string to normalize
+   * @return the normalized value.
+   */
+  firstCharLower: function(str) {
+    if (!str) { return str; }
+
+    return str.charAt(0).toLowerCase() + str.slice(1);
+  },
+
+  /**
    * Normalizes name type.
    * 
    * Difference between name and title is name only uppercases first letter of each word leaving original format of the rest of the letters.

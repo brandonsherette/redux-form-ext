@@ -1,0 +1,40 @@
+@media (min-width: 320px) {
+  .address-group {
+    .field-group {
+      display: block;
+      width: 100%;
+      & > * {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 720px) {
+  .address-group {
+    .field-group {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      width: 100%;
+      flex: 1;
+      & > * {
+        flex: 1;
+        padding-right: 1rem;
+        display: inline-block;
+      }
+      & > *:last-child {
+        padding-right: 0;
+      }
+    }
+    .address1 {
+      width: 60%;
+      max-width: 60%;
+    }
+    .address2 {
+      width: 40%;
+      max-width: 40%;
+    }
+  }
+}

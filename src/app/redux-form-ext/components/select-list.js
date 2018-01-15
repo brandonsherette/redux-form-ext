@@ -27,10 +27,12 @@ class SelectList extends Component {
 
     return (
       <div className="select-list form-group form-group-select-list row mx-0">
-        <label className={labelStyles} htmlFor={input.name}>
-          <span>{label}</span>
-          <span className="disclaimer label-hint">{labelHint}</span>
-        </label>
+        {label !== '' && (
+          <label className={labelStyles} htmlFor={input.name}>
+            <span>{label}</span>
+            <span className="disclaimer label-hint">{labelHint}</span>
+          </label>
+        )}
         <div className={inputWrapperStyles}>
           <select autoFocus={autoFocus} className="form-control" {...input}>
             {options.map((o) => (

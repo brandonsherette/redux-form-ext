@@ -67,10 +67,12 @@ class renderField extends Component {
 
     return (
       <div className="form-group form-group-text">
-        <label>
-          <span>{label}&nbsp;</span>
-          <span className="disclaimer">{labelDisclaimer}</span>
-        </label>
+        {(label !== '') && (
+          <label>
+            <span>{label}&nbsp;</span>
+            <span className="disclaimer">{labelDisclaimer}</span>
+          </label>
+        )}
         <div className="input-wrapper">
           <span className={inputStateIconStyles}></span>
           <input autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className={inputStyles} placeholder={placeholder} />
@@ -82,7 +84,7 @@ class renderField extends Component {
 }
 
 const Text = (props) => (
-  <div>
+  <div className={props.className}>
     <Field {...props} component={renderField} />
   </div>
 );
