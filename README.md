@@ -1,6 +1,10 @@
 # Redux Form Extension
 Extension for redux form. Prebuilt styled form components, validation, input normalization, multi step form (form wizard), and more.
 # Versions
+## Upcoming Version
+### Features
+- Added AddressGroup to FormComponents.
+
 ## v0.10.0
 ### Features
 - Added optional onStepDidChange prop to MultiStepForm.
