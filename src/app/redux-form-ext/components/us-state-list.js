@@ -76,7 +76,6 @@ const USStateList = (props) => (
 USStateList.propTypes = {
   autoFocus: PropTypes.bool.isRequired,
   name: PropTypes.string,
-  reduxFormChange: PropTypes.func.isRequired,
   label: PropTypes.any,
 };
 

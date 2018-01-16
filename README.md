@@ -802,6 +802,8 @@ export default StepAccount;
   - onStepDidChange(prevStepTitle, nextStepTitle)
 - saveError: String (optional)
   - The error from the save task.
+- showBackButton: Boolean (optional)
+  - Whether or not to show the back button (DEFAULT: true).
 - stepError: Node|String (optional)
   - Manual override if a step should be invalid, useful for notifiying a user of additional steps to make that step valid.
 - steps: ArrayOfMultiStepForm.Step (required)
