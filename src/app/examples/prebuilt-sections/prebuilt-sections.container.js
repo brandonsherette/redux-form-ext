@@ -5,9 +5,12 @@ import { change as reduxFormChange, reduxForm } from 'redux-form';
 import Loading from '../../vendor/loading/loading';
 import { FormComponents, Normalize } from '../../redux-form-ext/index';
 
+const FORM_NAME = 'prebuilt-sections';
+
 class PrebuiltSections extends Component {
   render() {
     const {
+      formValues,
       handleSubmit, 
       handleSave, 
       handleResetSaveState, 
@@ -49,7 +52,10 @@ class PrebuiltSections extends Component {
           <h3>Shipping</h3>
           <FormComponents.AddressGroup fieldNamePrefix="shipTo" />
           <h3>Billing</h3>
-          <FormComponents.AddressGroup fieldNamePrefix="billTo" />
+          <FormComponents.Checkbox label="Same as Shipping?" name="sameAsShipping" />
+          {!formValues.sameAsShipping && (
+            <FormComponents.AddressGroup fieldNamePrefix="billTo" />
+          )}
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </section>
@@ -66,7 +72,27 @@ PrebuiltSections.propTypes = {
 }
 
 const mapStateToProps = (state) => {
+  const initialValues = {
+    sameAsShipping: true,
+    shipToFirstname: '',
+    shipToLastname: '',
+    shipToAddress: '',
+    shipToAddress2: '',
+    shipToCity: '',
+    shipToState: '',
+    shipToZip: '',
+    billToFirstname: '',
+    billToLastname: '',
+    billToAddress: '',
+    billToAddress2: '',
+    billToCity: '',
+    billToState: '',
+    billToZip: '',
+  };
+
   return {
+    initialValues,
+    formValues: state.form[FORM_NAME] ? state.form[FORM_NAME].values : initialValues,
     isSaving: false,
     isSaveCompleted: false,
     saveError: ''
@@ -88,7 +114,7 @@ const Form = reduxForm({
 
     return Object.assign({}, 
       FormComponents.AddressGroup.evalFormValues(values, 'shipTo'), 
-      FormComponents.AddressGroup.evalFormValues(values, 'billTo'), 
+      (values.sameAsShipping) ? {} : FormComponents.AddressGroup.evalFormValues(values, 'billTo'), //billTo is valid if sameasshipping
       errors
     );
   }
