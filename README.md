@@ -3,6 +3,9 @@ Extension for redux form. Prebuilt styled form components, validation, input nor
 
 # Latest Release (2018.1.16)
 ## v0.11.2
+### Updates
+- Made zip number field.
+
 ### Bugs/Fixes
 - Potential fix for input autoComplete.
 

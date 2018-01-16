@@ -70,6 +70,7 @@ class AddressGroup extends Component {
             />
           </div>
           <Text
+            type="number"
             className="zip"
             placeholder="Zip"
             label="Zip"
