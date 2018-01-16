@@ -5,14 +5,15 @@ import { Field } from 'redux-form';
 
 class SelectList extends Component {
   render() {
-    const { autoFocus, label, labelHint, input, isLabelInline, options, meta: { dirty, touched, error, warning, valid } } = this.props;
+    const { autoFocus, label, labelHint, input, isLabelInline, isLabelHidden, options, meta: { dirty, touched, error, warning, valid } } = this.props;
     const labelStyles = classNames(
       'block',
       {
         'label-box': isLabelInline,
         'col-md-3 col-sm-3 col-xs-12': isLabelInline,
         'valid': (valid && isLabelInline),
-        'invalid': (!valid && (dirty || touched) && isLabelInline)
+        'invalid': (!valid && (dirty || touched) && isLabelInline),
+        'label-hidden': isLabelHidden,
       }
     );
     const inputWrapperStyles = classNames(
@@ -27,12 +28,10 @@ class SelectList extends Component {
 
     return (
       <div className="select-list form-group form-group-select-list row mx-0">
-        {label !== '' && (
-          <label className={labelStyles} htmlFor={input.name}>
-            <span>{label}</span>
-            <span className="disclaimer label-hint">{labelHint}</span>
-          </label>
-        )}
+        <label className={labelStyles} htmlFor={input.name}>
+          <span>{label}</span>
+          <span className="disclaimer label-hint">{labelHint}</span>
+        </label>
         <div className={inputWrapperStyles}>
           <select autoFocus={autoFocus} className="form-control" {...input}>
             {options.map((o) => (
@@ -55,6 +54,7 @@ FieldSelectList.propTypes = {
   label: PropTypes.any,
   labelHint: PropTypes.node,
   isLabelInline: PropTypes.bool,
+  isLabelHidden: PropTypes.bool,
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   validate: PropTypes.array
@@ -64,6 +64,7 @@ FieldSelectList.defaultProps = {
   autoFocus: false,
   label: '',
   isLabelInline: true,
+  isLabelHidden: false,
   validate: []
 };
 

@@ -27,6 +27,7 @@ class renderField extends Component {
       label, 
       labelDisclaimer, 
       isLabelInline, 
+      isLabelHidden,
       placeholder, 
       type, 
       maxLength, 
@@ -49,10 +50,14 @@ class renderField extends Component {
       }
     );
 
+    const labelStyles = classNames({
+      'label-hidden': isLabelHidden,
+    });
+
     if (isLabelInline) {
       return (
         <div className="form-group form-group-text row no-side-margin">
-          <label className="col-md-3 block label-box" htmlFor={input.name}>
+          <label className={"col-md-3 block label-box " + labelStyles } htmlFor={input.name}>
             <span>{label}&nbsp; </span>
             <span className="disclaimer">{labelDisclaimer}</span>
           </label>
@@ -67,12 +72,10 @@ class renderField extends Component {
 
     return (
       <div className="form-group form-group-text">
-        {(label !== '') && (
-          <label>
-            <span>{label}&nbsp;</span>
-            <span className="disclaimer">{labelDisclaimer}</span>
-          </label>
-        )}
+        <label className={labelStyles} htmlFor={input.name}>
+          <span>{label}&nbsp;</span>
+          <span className="disclaimer">{labelDisclaimer}</span>
+        </label>
         <div className="input-wrapper">
           <span className={inputStateIconStyles}></span>
           <input autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className={inputStyles} placeholder={placeholder} />
@@ -91,12 +94,13 @@ const Text = (props) => (
 
 Text.propTypes = {
   autoFocus: PropTypes.bool,
-  label: PropTypes.any,
+  label: PropTypes.any.isRequired,
   labelDisclaimer: PropTypes.any,
   maxLength: PropTypes.string,
   name: PropTypes.string.isRequired,
   normalize: PropTypes.func,
   placeholder: PropTypes.string,
+  isLabelHidden: PropTypes.bool,
   isLabelInline: PropTypes.bool,
   type: PropTypes.string,
   validate: PropTypes.array
@@ -104,11 +108,11 @@ Text.propTypes = {
 
 Text.defaultProps = {
   autoFocus: false,
-  label: '',
   labelDisclaimer: '',
   maxLength: null,
   placeholder: '',
   normalize: null,
+  isLabelHidden: false,
   isLabelInline: true,
   type: 'text',
   validate: []

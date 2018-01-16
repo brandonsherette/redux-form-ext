@@ -204,7 +204,7 @@ class MultiStepForm extends Component {
             })}
           </ol>
         </div>
-        <form onSubmit={handleSubmit((values) => { this.evalSubmit(values) })}>
+        <form autoComplete="off" onSubmit={handleSubmit((values) => { this.evalSubmit(values) })}>
           {saveError && (<div className="alert alert-danger" role="alert">{saveError}</div>)}
           {curStepError && (<div className="step-error">{curStepError}</div>)}
           <div className="form-step-wrapper">

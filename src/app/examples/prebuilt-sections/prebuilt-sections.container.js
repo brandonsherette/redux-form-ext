@@ -48,7 +48,7 @@ class PrebuiltSections extends Component {
         <header>
           <h1>Prebuilt Sections</h1>
         </header>
-        <form className="form" onSubmit={handleSubmit((values) => { handleSave(values) }) }>
+        <form autoComplete="off" className="form" onSubmit={handleSubmit((values) => { handleSave(values) }) }>
           <h3>Shipping</h3>
           <FormComponents.AddressGroup fieldNamePrefix="shipTo" />
           <h3>Billing</h3>

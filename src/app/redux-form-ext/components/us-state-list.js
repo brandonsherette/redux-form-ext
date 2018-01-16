@@ -70,19 +70,19 @@ states.forEach((state) => {
 });
 
 const USStateList = (props) => (
-  <SelectList {...props}  options={options}></SelectList>
+  <SelectList label="State" {...props}  options={options}></SelectList>
 );
 
 USStateList.propTypes = {
   autoFocus: PropTypes.bool.isRequired,
   name: PropTypes.string,
-  label: PropTypes.any,
+  isLabelHidden: PropTypes.bool,
 };
 
 USStateList.defaultProps = {
   autoFocus: false,
   name: 'state',
-  label: '',
+  isLabelHidden: false,
 };
 
 export default USStateList;

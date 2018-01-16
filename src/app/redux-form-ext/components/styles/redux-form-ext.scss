@@ -30,9 +30,28 @@ form {
     color: $color-error;
   }
 
+  .form-group {
+    position: relative;
+    overflow: hidden;
+    label.label-hidden {
+      position: absolute;
+      left: 0;
+      top:0;
+      text-indent: -150%;
+    }
+  }
+
   /* Group Text */
   .form-group-text {
     input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="number"],
+    input[type="range"],
+    input[type="date"],
+    input[type="time"],
     input[type="password"] {
       border: 1px solid $color-border;
       height: $input-height;

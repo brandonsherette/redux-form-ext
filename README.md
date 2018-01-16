@@ -2,13 +2,9 @@
 Extension for redux form. Prebuilt styled form components, validation, input normalization, multi step form (form wizard), and more.
 
 # Latest Release (2018.1.16)
-## v0.11.1
-### Features
-- Added showBackButton prop to MultiStepFormComponent.
-### Updates
-- Updated MultiStep Footer Styles
+## v0.11.2
 ### Bugs/Fixes
-- Fixed Validation for Zip Code.
+- Potential fix for input autoComplete.
 
 # Dependencies
 - classnames
@@ -820,6 +816,27 @@ require('redux-form-ext/dist/redux-form-ext.css');
 Or you can copy over the files from **node_modules/redux-form-ext/dist/redux-form-ext.css** and include them into your webpage.
 
 # Versions
+## v0.11.1
+### Features
+- Added showBackButton prop to MultiStepFormComponent.
+### Updates
+- Updated MultiStep Footer Styles
+### Bugs/Fixes
+- Fixed Validation for Zip Code.
+
+# Dependencies
+- classnames
+- prop-types
+- rc-slider
+- react
+- react-async-script
+- react-dom
+- react-google-recaptcha
+- react-redux
+- react-select
+- redux
+- redux-form
+
 ## v0.11.0
 ### Features
 - Added AddressGroup to FormComponents.

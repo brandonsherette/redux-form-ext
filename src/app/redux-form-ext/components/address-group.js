@@ -18,51 +18,64 @@ class AddressGroup extends Component {
             placeholder="Firstname"
             name={fieldNamePrefix + 'Firstname'}
             normalize={Normalize.name}
+            label="Firstname"
             isLabelInline={false}
+            isLabelHidden={true}
           />
           <Text
             className="lastname"
             placeholder="Lastname"
+            label="Lastname"
             name={fieldNamePrefix + 'Lastname'}
             normalize={Normalize.name}
             isLabelInline={false}
+            isLabelHidden={true}
           />
         </div>
         <div className="field-group">
           <Text
             className="address1"
             placeholder="Street Address"
+            label="Address"
             name={fieldNamePrefix + 'Address'}
             normalize={Normalize.name}
             isLabelInline={false}
+            isLabelHidden={true}
           />
           <Text
             className="address2"
             placeholder="Apt, suite, etc... (optional)"
+            label="Address 2"
             name={fieldNamePrefix + 'Address2'}
             normalize={Normalize.name}
             isLabelInline={false}
+            isLabelHidden={true}
           />
         </div>
         <div className="field-group">
           <Text
             className="city"
             placeholder="City"
+            label="City"
             name={fieldNamePrefix + 'City'}
             normalize={Normalize.name}
             isLabelInline={false}
+            isLabelHidden={true}
           />
           <div className="state">
             <USStateList
               name={fieldNamePrefix + 'State'}
               isLabelInline={false}
+              isLabelHidden={true}
             />
           </div>
           <Text
             className="zip"
             placeholder="Zip"
+            label="Zip"
             name={fieldNamePrefix + 'Zip'}
             isLabelInline={false}
+            isLabelHidden={true}
           />
         </div>
       </div>
