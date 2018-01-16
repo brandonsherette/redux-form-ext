@@ -100,7 +100,7 @@ AddressGroup.evalFormValues = (formValues, fieldNamePrefix) => {
     errors[fieldNamePrefix + 'Zip'] = 'Required';
   }
 
-  if (!Number.isInteger(zipValue) || zipValue.length < 5) {
+  if (!/^[\d]{5,}$/.test(zipValue)) {
     errors[fieldNamePrefix + 'Zip'] = 'Invalid Zip';
   }
 

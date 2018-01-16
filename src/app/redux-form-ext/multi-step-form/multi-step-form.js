@@ -182,7 +182,7 @@ class MultiStepForm extends Component {
 
   render() {
     const { curStepIndex, numOfSteps } = this.state;
-    const { errors, handleSubmit, isSaving, isSavingComponent, saveError, saveLabel, steps } = this.props;
+    const { errors, handleSubmit, isSaving, isSavingComponent, saveError, saveLabel, showBackButton, steps } = this.props;
     const CurStepComponent = steps[curStepIndex];
     const curStepError = CurStepComponent.props.stepError;
     const isCurStepInvalid = this.isStepInvalid(CurStepComponent, errors);
@@ -213,10 +213,12 @@ class MultiStepForm extends Component {
             </div>
           </div>
           <div className="form-footer">
-            <div className="pull-left">
-              <button type="button" disabled={curStepIndex === 0} onClick={this.gotoStep.bind(this, curStepIndex - 1)} className="btn btn-primary btn-back"><i className="fa fa-chevron-circle-left"></i>&nbsp;Back</button>
-            </div>
-            <div className="pull-right">
+            {showBackButton && (
+              <div className="btn-back-wrapper">
+                <button type="button" disabled={curStepIndex === 0} onClick={this.gotoStep.bind(this, curStepIndex - 1)} className="btn btn-primary btn-back"><i className="fa fa-chevron-circle-left"></i>&nbsp;Back</button>
+              </div>
+            )}
+            <div className="btn-next-wrapper">
               {curStepIndex !== numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-primary btn-next">Next&nbsp;<i className="fa fa-chevron-circle-right"></i></button>)}
               {curStepIndex === numOfSteps - 1 && (<button type="submit" disabled={isCurStepInvalid} className="btn btn-success btn-next"><i className="fa fa-floppy-o"></i>&nbsp;{saveLabel}</button>)}
             </div>
@@ -264,6 +266,7 @@ MultiStepForm.propTypes = {
   onStepDidChange: PropTypes.func,
   saveError: PropTypes.string,
   saveLabel: PropTypes.string,
+  showBackButton: PropTypes.bool,
   steps: PropTypes.array.isRequired,
   errors: PropTypes.object,
 };
@@ -271,6 +274,7 @@ MultiStepForm.propTypes = {
 MultiStepForm.defaultProps = {
   isSavingComponent: (<div className="saving">Saving...</div>),
   saveLabel: 'Save',
+  showBackButton: true,
 };
 
 MultiStepForm.Step = Step;

@@ -1,6 +1,15 @@
 # Redux Form Extension
 Extension for redux form. Prebuilt styled form components, validation, input normalization, multi step form (form wizard), and more.
 
+# Latest Release (2018.1.16)
+## v0.11.1
+### Features
+- Added showBackButton prop to MultiStepFormComponent.
+### Updates
+- Updated MultiStep Footer Styles
+### Bugs/Fixes
+- Fixed Validation for Zip Code.
+
 # Dependencies
 - classnames
 - prop-types

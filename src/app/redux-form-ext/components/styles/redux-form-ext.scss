@@ -1,7 +1,17 @@
 @import './colors';
 
-form.form-sm {
-  width: 50%;
+@media (min-width: 320px) {
+  form.form-sm {
+    width: 100%;
+  }
+}
+
+@media (min-width: 720px) {
+  form.form-sm {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 form {

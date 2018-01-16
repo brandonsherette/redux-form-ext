@@ -1,7 +1,36 @@
-.multi-step-form {
-  .form-footer:after {
-    content: "";
-    display: block;
-    clear: both;
+@media (min-width: 320px) {
+  .multi-step-form {
+    .form-footer:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      & > * {
+        padding-right: 1rem;
+        width: 100%;
+        flex: 1;
+        button, button.btn {
+          width: 100%;
+        }
+      }
+      & > *:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 720px) {
+  .multi-step-form {
+    .form-footer > * {
+      max-width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }

@@ -61,6 +61,7 @@ class ManualStepInvalid extends Component {
           isSaving={isSaving}
           isSavingComponent={(<Loading title="Saving..." />)}
           saveError={saveError}
+          showBackButton={false}
           steps={steps}
           errors={formSyncErrors}
           onStepDidChange={this._onStepDidChange}
