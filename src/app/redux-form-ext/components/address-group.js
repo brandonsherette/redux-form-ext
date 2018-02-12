@@ -14,6 +14,7 @@ class AddressGroup extends Component {
       <div className="address-group">
         <div className="field-group">
           <Text
+            autoComplete="given-name"
             className="firstname"
             placeholder="Firstname"
             name={fieldNamePrefix + 'Firstname'}
@@ -23,6 +24,7 @@ class AddressGroup extends Component {
             isLabelHidden={true}
           />
           <Text
+            autoComplete="family-name"
             className="lastname"
             placeholder="Lastname"
             label="Lastname"
@@ -34,6 +36,7 @@ class AddressGroup extends Component {
         </div>
         <div className="field-group">
           <Text
+            autoComplete="address-line1"
             className="address1"
             placeholder="Street Address"
             label="Address"
@@ -43,6 +46,7 @@ class AddressGroup extends Component {
             isLabelHidden={true}
           />
           <Text
+            autoComplete="address-line2"
             className="address2"
             placeholder="Apt, suite, etc... (optional)"
             label="Address 2"
@@ -54,6 +58,7 @@ class AddressGroup extends Component {
         </div>
         <div className="field-group">
           <Text
+            autoComplete="address-level2"
             className="city"
             placeholder="City"
             label="City"
@@ -70,6 +75,7 @@ class AddressGroup extends Component {
             />
           </div>
           <Text
+            autoComplete="postal-code"
             type="number"
             className="zip"
             placeholder="Zip"

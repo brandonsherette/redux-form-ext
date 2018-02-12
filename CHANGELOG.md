@@ -1,6 +1,10 @@
+# v0.11.4
+## Updates
+- Added autoComplete values to AddressGroup.
+
 # v0.11.3
 ## Updates
-- Added autoComplete field to FormComponents.Text.
+- Added autoComplete prop to FormComponents.Text.
 
 # v0.11.2
 ## Updates
