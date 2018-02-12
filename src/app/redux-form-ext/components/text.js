@@ -22,6 +22,7 @@ const renderNotification = (touched, error, warning) => {
 class renderField extends Component {
   render() {
     const {
+      autoComplete,
       autoFocus,
       input, 
       label, 
@@ -62,7 +63,7 @@ class renderField extends Component {
             <span className="disclaimer">{labelDisclaimer}</span>
           </label>
           <div className="col-md-9 no-side-padding input-wrapper">
-            <input autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className="form-control" placeholder={placeholder} />
+            <input autoComplete={autoComplete} autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className="form-control" placeholder={placeholder} />
             <span className={inputStateIconStyles}></span>
             {renderNotification(touched, error, warning) }
           </div>
@@ -78,7 +79,7 @@ class renderField extends Component {
         </label>
         <div className="input-wrapper">
           <span className={inputStateIconStyles}></span>
-          <input autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className={inputStyles} placeholder={placeholder} />
+          <input autoComplete={autoComplete} autoFocus={autoFocus} {...input} maxLength={maxLength} type={type} className={inputStyles} placeholder={placeholder} />
           {renderNotification(touched, error, warning) }
         </div>
       </div>
@@ -93,6 +94,7 @@ const Text = (props) => (
 );
 
 Text.propTypes = {
+  autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   label: PropTypes.any.isRequired,
   labelDisclaimer: PropTypes.any,

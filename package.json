@@ -1,6 +1,6 @@
 {
   "name": "redux-form-ext",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "description": "Redux Form Extension",
   "main": "dist/redux-form-ext.js",
   "scripts": {

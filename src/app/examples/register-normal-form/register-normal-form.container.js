@@ -60,7 +60,7 @@ class RegisterNormalForm extends Component {
           <h1>Normal Form Registration</h1>
         </header>
         <form className="form" onSubmit={handleSubmit((values) => { handleSave(values) }) }>
-          <FormComponents.Text label="* Email" placeholder="Email" name="email" isLabelInline={false} />
+          <FormComponents.Text autoComplete="email" label="* Email" placeholder="Email" name="email" isLabelInline={false} />
           <FormComponents.Text normalize={Normalize.name} label="* Firstname" placeholder="Firstname" name="firstname" isLabelInline={false} />
           <FormComponents.Text normalize={Normalize.name} label="* Lastname" placeholder="Lastname" name="lastname" isLabelInline={false} />
           <FormComponents.Text label="* Password" placeholder="Password" name="password" type="password" isLabelInline={false} />
