@@ -1,3 +1,7 @@
+# v0.11.5
+## Updates
+- Updated placeholder for First Name and Last Name.
+
 # v0.11.4
 ## Updates
 - Added autoComplete values to AddressGroup.

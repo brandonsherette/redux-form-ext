@@ -16,18 +16,18 @@ class AddressGroup extends Component {
           <Text
             autoComplete="given-name"
             className="firstname"
-            placeholder="Firstname"
+            placeholder="First Name"
             name={fieldNamePrefix + 'Firstname'}
             normalize={Normalize.name}
-            label="Firstname"
+            label="First Name"
             isLabelInline={false}
             isLabelHidden={true}
           />
           <Text
             autoComplete="family-name"
             className="lastname"
-            placeholder="Lastname"
-            label="Lastname"
+            placeholder="Last Name"
+            label="Last Name"
             name={fieldNamePrefix + 'Lastname'}
             normalize={Normalize.name}
             isLabelInline={false}
