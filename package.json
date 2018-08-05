@@ -1,6 +1,6 @@
 {
   "name": "redux-form-ext",
-  "version": "0.11.5",
+  "version": "0.11.6",
   "description": "Redux Form Extension",
   "main": "dist/redux-form-ext.js",
   "scripts": {
@@ -13,20 +13,20 @@
   "keywords": [],
   "author": "Brandon Sherette <brandonsherette@gmail.com>",
   "license": "ISC",
+  "peerDependencies": {
+    "react": "^15.4.2 || ^16.0.0",
+    "react-dom": "^15.4.2 || ^16.0.0",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0",
+    "redux-form": "^6.7.0 || ^7.0.0"
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10",
-    "rc-slider": "^8.0.2",
-    "react": "^15.4.2",
-    "react-addons-css-transition-group": "^15.4.2",
     "react-async-script": "^0.9.1",
-    "react-dom": "^15.4.2",
     "react-google-recaptcha": "^0.9.7",
-    "react-redux": "^5.0.5",
     "react-select": "^1.0.0-rc.5",
-    "redux": "^3.6.0",
-    "redux-form": "^6.7.0",
-    "redux-logger": "^3.0.6"
+    "rc-slider": "^8.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
@@ -40,7 +40,14 @@
     "file-loader": "^0.10.0",
     "gulp": "^3.9.1",
     "node-sass": "^4.5.0",
+    "react": "^15.4.2",
+    "react-async-script": "^0.9.1",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.5",
+    "react-select": "^1.0.0-rc.5",
+    "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "redux-logger": "^3.0.6",
     "resolve-url-loader": "^2.0.0",
     "sass-loader": "^6.0.1",
     "style-loader": "^0.13.1",

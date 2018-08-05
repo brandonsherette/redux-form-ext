@@ -3,9 +3,9 @@ const config = require('./config.js');
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const dependencies = require('./package.json').dependencies;
+const package = require('./package.json');
 const externals = {};
-const allDependencies = Object.assign({}, dependencies, {
+const allDependencies = Object.assign({}, package.dependencies, package.peerDependencies, {
   /* add css dependencies */
 });
 

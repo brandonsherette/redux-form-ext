@@ -1,3 +1,7 @@
+# v0.11.6
+## Maintenance
+- Updated dependencies.
+
 # v0.11.5
 ## Updates
 - Updated placeholder for First Name and Last Name.
